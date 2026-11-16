@@ -1,231 +1,908 @@
 {
-  "inicio": "2026-11-17",
-  "cadaDias": 2,
-  "horarios": ["11:30"],
-  "site": "armetec.com.br",
-  "insta": "@armetec.br",
-  "posts": [
-    {"f": "institucional", "k": "Quem somos", "pre": "Prazer,", "h": "Somos a <em>Armetec</em>", "sub": "Criamos sites, sistemas e aplicativos para que o dia a dia da sua empresa fique mais simples.",
-     "itens": [["Dois sócios, <em>um propósito</em>", "A Armetec nasceu da vontade de levar tecnologia de qualidade para empresas que precisam estar bem no digital, sem a burocracia e o custo de grandes agências."],
-               ["100% <em>online</em>", "Atendemos empresas de todo o Brasil com reuniões online, grupo direto no WhatsApp e relatórios de progresso."],
-               ["Do design <em>ao código</em>", "Cada site ou sistema é criado do zero para o seu negócio. Nada de template genérico."],
-               ["Com você <em>depois da entrega</em>", "Acompanhamos seu produto depois do lançamento, com manutenção e evolução."]],
-     "leg": "Muito prazer! A Armetec cria sites, sistemas e aplicativos sob medida para empresas que querem crescer sem complicação. Arrasta pro lado e conhece a gente."},
-
-    {"f": "mockup", "k": "Sistema sob medida", "h": "Um sistema do jeito que <em>sua empresa trabalha.</em>", "sub": "Agenda, equipe e financeiro em um só lugar, com as demais funções que sua empresa precisa.", "tela": "financeiro",
-     "leg": "Nada de se adaptar a um programa pronto que não conversa com a sua rotina. Na Armetec o sistema é desenhado em cima do jeito que a sua empresa já trabalha."},
-
-    {"f": "dor", "k": "Você ainda faz isso?", "h": "Sua empresa ainda roda na <em>planilha?</em>", "sub": "Se a resposta é sim, esse post é pra você.",
-     "caos": ["planilha_final_v3.xlsx", "Caderno de pedidos", "WhatsApp · 47 mensagens"],
-     "itens": [["Cada um tem <em>uma versão</em> da planilha", "Ninguém sabe qual é a certa, alguém apaga uma fórmula e o número do mês muda sozinho."],
-               ["Informação <em>espalhada</em> no WhatsApp", "Pedido num grupo, orçamento no outro, recado no áudio. Achar algo vira uma caça ao tesouro."],
-               ["Você é o <em>gargalo</em>", "Tudo depende de você lembrar, conferir e repassar. Se você para, a empresa para."]],
-     "sol": {"h": "Com um sistema <em>sob medida:</em>", "itens": ["Todo mundo vê a mesma informação, em tempo real", "Cada pessoa acessa só o que precisa", "Relatórios prontos, sem montar planilha", "Funciona no computador e no celular"]},
-     "leg": "Planilha é ótima pra começar. O problema é quando a empresa cresce e ela vira o sistema principal. Arrasta pro lado e veja os sinais."},
-
-    {"f": "frase", "h": "Se depende da sua memória, <em>não é processo.</em> É sorte.", "sub": "Processo bom fica no sistema, não na cabeça do dono.",
-     "leg": "Toda empresa tem aquela tarefa que só funciona porque alguém lembra de fazer. Até o dia em que ninguém lembra."},
-
-    {"f": "institucional", "k": "Como trabalhamos", "pre": "Do zero", "h": "ao <em>ar</em> em 4 etapas", "sub": "Seu projeto, sem complicação: você sabe exatamente em que pé está cada etapa.",
-     "itens": [["<em>Entender</em> o seu negócio", "Conversamos sobre sua rotina, seus problemas e onde você quer chegar. Só depois pensamos em tela."],
-               ["Escopo e valor <em>antes de começar</em>", "Você recebe o que será feito, o prazo e o investimento. Sem surpresas no meio do caminho."],
-               ["Entregas <em>toda semana</em>", "Demonstrações semanais e um canal direto com quem está desenvolvendo. Você acompanha tudo de perto."],
-               ["No ar e <em>evoluindo</em>", "Publicamos, monitoramos e seguimos com manutenção e melhorias depois do lançamento."]],
-     "leg": "Muita gente tem medo de contratar um sistema porque já ouviu história de projeto que nunca termina. Aqui é assim que funciona."},
-
-    {"f": "mockup", "k": "Sites", "h": "Seu site deveria <em>trazer clientes</em>, não só existir.", "sub": "Sites rápidos, bonitos e otimizados para Google, celular e conversão.", "tela": "site",
-     "telaExtra": {"marca": "Sua Marca", "h": "Seu negócio <em>no topo</em> do Google"},
-     "leg": "Um site que demora pra abrir no celular ou que ninguém encontra no Google é um cartão de visita guardado na gaveta. Site bom trabalha por você 24 horas por dia."},
-
-    {"f": "dor", "k": "Agenda bagunçada", "h": "Cliente marcando pelo <em>WhatsApp</em> às 23h?", "sub": "A agenda manual cobra caro, e a conta chega em horário duplicado.",
-     "caos": ["Agenda de papel", "WhatsApp · 12 não lidas", "Horário duplicado"],
-     "itens": [["Você responde <em>no meio do atendimento</em>", "Para o que está fazendo, responde, confere a agenda e torce para não ter esquecido nada."],
-               ["Dois clientes <em>no mesmo horário</em>", "Anotou num lugar, esqueceu no outro. Resultado: alguém espera, alguém vai embora."],
-               ["Falta sem aviso", "Sem lembrete automático, o cliente esquece e o horário fica vazio."]],
-     "sol": {"h": "Com agendamento <em>online:</em>", "itens": ["O cliente escolhe o horário sozinho, por um link", "O sistema não deixa marcar dois no mesmo horário", "Lembrete antes do atendimento", "Você vê a agenda da equipe inteira no celular"]},
-     "case": {"k": "Case Armetec", "t": "Foi assim que nasceu o <em>Titan Barber</em>", "p": "Sistema de gestão para barbearias criado pela Armetec: agenda online, comissões, caixa e fidelidade.", "tela": "barbearia"},
-     "leg": "Agenda no WhatsApp parece de graça, mas custa horário perdido, cliente irritado e você preso no celular. Arrasta e vê como resolver."},
-
-    {"f": "frase", "claro": true, "h": "Tecnologia boa é a que <em>ninguém precisa de manual</em> pra usar.", "sub": "Soluções fáceis de usar, sem complicação técnica.",
-     "leg": "Se a equipe precisa de treinamento de uma semana pra usar o sistema, o problema não é a equipe."},
-
-    {"f": "mockup", "k": "Agenda online", "h": "Agenda cheia, <em>sem trocar mensagem.</em>", "sub": "Agendamento online, confirmação e lembretes automáticos para clínicas, estúdios e prestadores de serviço.", "tela": "agenda",
-     "leg": "Seu cliente quer marcar na hora que lembra, nem sempre no seu horário comercial. Com agenda online, ele marca sozinho e você só atende."},
-
-    {"f": "institucional", "k": "O que fazemos", "pre": "Do site", "h": "ao <em>sistema</em>, um só time", "sub": "Tudo o que sua empresa precisa no digital, feito pelas mesmas pessoas.",
-     "itens": [["<em>Sites</em> que vendem", "Sites institucionais, landing pages e lojas virtuais otimizados para Google, celular e conversão."],
-               ["<em>Sistemas</em> que organizam", "ERPs, CRMs, agendamentos, portais de clientes e automações que eliminam planilha e retrabalho."],
-               ["<em>Aplicativos</em> no celular", "Todo projeto é entregue como PWA: instala direto na tela inicial, sem depender de loja de apps."],
-               ["<em>Infraestrutura</em> que não para", "Nuvem, publicação automatizada, monitoramento e backups para seu sistema ficar no ar."]],
-     "leg": "Site com uma empresa, sistema com outra, app com uma terceira... e nenhuma conversa com a outra. Aqui é um time só, do começo ao fim."},
-
-    {"f": "dor", "k": "Retrabalho", "h": "Quanto tempo sua equipe perde <em>digitando a mesma coisa?</em>", "sub": "Retrabalho não aparece no balanço, mas pesa na folha.",
-     "caos": ["Copiar e colar", "Planilha de controle", "Relatório manual"],
-     "itens": [["O mesmo dado <em>em 3 lugares</em>", "Cadastra o cliente na planilha, depois no orçamento, depois na nota. Cada cópia é uma chance de errar."],
-               ["Relatório que leva <em>uma tarde</em>", "Todo fim de mês alguém junta números de vários arquivos para montar um resumo."],
-               ["Erro que só aparece <em>tarde demais</em>", "Valor digitado errado, pedido duplicado, cliente cobrado duas vezes."]],
-     "sol": {"h": "Com <em>automação:</em>", "itens": ["Cada informação é digitada uma vez só", "Relatórios saem prontos, na hora", "O sistema avisa quando algo não bate", "Sua equipe foca no que gera resultado"]},
-     "leg": "Se alguém da sua equipe passa horas copiando informação de um lugar pro outro, isso tem solução. Arrasta pro lado."},
-
-    {"f": "frase", "h": "Você não precisa de <em>mais uma planilha.</em> Precisa de um sistema.", "sub": "Do controle de pedidos ao financeiro, tudo no mesmo lugar.",
-     "leg": "Cada planilha nova resolve um problema e cria outro: mais um arquivo pra atualizar, mais uma versão pra conferir."},
-
-    {"f": "mockup", "k": "Vendas", "h": "Saiba <em>exatamente</em> onde está cada venda.", "sub": "CRM sob medida: leads, propostas, follow-ups e metas da equipe em um painel só.", "tela": "vendas",
-     "leg": "Lead que ninguém retornou é venda que foi pro concorrente. Com um CRM do jeito da sua empresa, nenhum contato fica esquecido."},
-
-    {"f": "institucional", "k": "Diferenciais", "pre": "Por que a", "h": "<em>Armetec?</em>", "sub": "O que você pode esperar de nós em todo projeto.",
-     "itens": [["Preço, prazo e escopo <em>claros</em>", "Tudo definido desde o primeiro contato. Sem surpresas no meio do projeto."],
-               ["Você fala com <em>quem desenvolve</em>", "Sem ticket, sem robô, sem fila de atendimento. Direto com o time que fez seu projeto."],
-               ["O código <em>é seu</em>", "Ao final você recebe o código-fonte, acessos e documentação. Sem amarras e sem dependência."],
-               ["<em>Segurança</em> desde o início", "Dados criptografados, boas práticas de LGPD, código revisado e atualizações frequentes."]],
-     "leg": "Antes de contratar qualquer empresa de tecnologia, faça essas 4 perguntas. A gente responde todas aqui."},
-
-    {"f": "dor", "k": "Site parado", "h": "Seu site existe, mas <em>não traz cliente?</em>", "sub": "3 motivos comuns (e o que fazer).",
-     "caos": ["Site de 2016", "Carregando…", "Página não encontrada"],
-     "itens": [["Demora pra <em>abrir no celular</em>", "A maioria das visitas vem do celular. Se o site demora alguns segundos, a pessoa volta pro Google e clica no próximo."],
-               ["<em>Ninguém encontra</em> no Google", "Sem estrutura de SEO, seu site não aparece quando o cliente procura o que você vende."],
-               ["Não diz <em>o próximo passo</em>", "O visitante gostou, mas não sabe como pedir orçamento. Sem botão claro, ele vai embora."]],
-     "sol": {"h": "Um site que <em>trabalha por você:</em>", "itens": ["Rápido no celular", "Otimizado para aparecer no Google", "WhatsApp e orçamento a um toque", "Indicadores de acesso e contatos"]},
-     "leg": "Ter site não é o mesmo que ter um site que vende. Arrasta pro lado e confere se o seu tem algum desses problemas."},
-
-    {"f": "frase", "claro": true, "h": "Seu cliente procura no Google <em>antes de te chamar.</em>", "sub": "O que ele encontra lá é a primeira impressão da sua empresa.",
-     "leg": "Antes do primeiro contato, o cliente já pesquisou, viu seu site (ou não viu) e formou uma opinião."},
-
-    {"f": "mockup", "k": "Loja virtual", "h": "Pedidos, estoque e entregas <em>sem caderno.</em>", "sub": "Loja virtual integrada com o seu controle de pedidos e estoque.", "tela": "pedidos",
-     "leg": "Vender online é só metade do trabalho. A outra metade é separar, controlar o estoque e entregar sem erro, e isso também pode ser automático."},
-
-    {"f": "institucional", "k": "PWA", "pre": "Seu sistema", "h": "na <em>tela inicial</em> do celular", "sub": "Todo projeto da Armetec é entregue como PWA. Entenda o que isso significa.",
-     "itens": [["O que é <em>PWA?</em>", "É um site que funciona como aplicativo: tem ícone na tela inicial, abre em tela cheia e é rápido."],
-               ["Sem <em>loja de apps</em>", "Não precisa publicar na App Store ou no Google Play. Você manda um link e a pessoa instala."],
-               ["Atualiza <em>sozinho</em>", "Toda melhoria chega para todo mundo na hora, sem pedir para ninguém atualizar nada."],
-               ["Um código, <em>todos os aparelhos</em>", "Funciona no iPhone, no Android e no computador. Menos custo, mesmo resultado."]],
-     "leg": "Quer um app para sua empresa mas acha que é caro e complicado? Talvez você precise de um PWA. Arrasta pro lado."},
-
-    {"f": "dor", "k": "Financeiro", "h": "Faturou bem, mas <em>não sobrou nada?</em>", "sub": "O problema pode não ser a venda. Pode ser o controle.",
-     "caos": ["Extrato do banco", "Contas a pagar.xlsx", "Notinha perdida"],
-     "itens": [["Entrada e saída <em>misturadas</em>", "Dinheiro da empresa e gasto do dia a dia no mesmo lugar. No fim do mês, ninguém sabe o que foi o quê."],
-               ["Custos <em>escondidos</em>", "Taxa de maquininha, comissão, imposto, assinatura esquecida. Pequenos valores que somados viram muito."],
-               ["Decisão <em>no escuro</em>", "Sem número confiável, contratar, investir ou dar desconto vira chute."]],
-     "sol": {"h": "Com o financeiro <em>no sistema:</em>", "itens": ["Fluxo de caixa atualizado todo dia", "Custos e taxas descontados automaticamente", "Lucro real do mês, sem conta de cabeça", "Comparação com os meses anteriores"]},
-     "leg": "Faturamento é vaidade, lucro é sanidade. Se você não sabe quanto sobrou no mês passado, arrasta pro lado."},
-
-    {"f": "frase", "h": "Empresa que cresce na base do <em>improviso</em> uma hora trava.", "sub": "Organizar agora custa menos do que arrumar depois.",
-     "leg": "Crescer é ótimo. Crescer sem processo é contratar mais gente para apagar mais incêndio."},
-
-    {"f": "mockup", "k": "Case Titan Barber", "h": "Criamos o <em>Titan Barber</em> para barbearias.", "sub": "Agenda online, comissões, caixa e fidelidade: um sistema completo, desenvolvido pela Armetec.", "tela": "barbearia",
-     "leg": "O Titan Barber é um sistema de gestão para barbearias criado do zero pela Armetec. É o mesmo cuidado que colocamos em cada projeto de cliente."},
-
-    {"f": "institucional", "k": "Antes de contratar", "pre": "4 perguntas", "h": "antes de contratar um <em>sistema</em>", "sub": "Evite dor de cabeça e dinheiro jogado fora.",
-     "itens": [["O código <em>fica com você?</em>", "Se a empresa sumir amanhã, você consegue continuar? Exija código-fonte, acessos e documentação."],
-               ["Quanto custa <em>de verdade?</em>", "Escopo, prazo e valor precisam estar no papel antes de começar."],
-               ["Você vai <em>acompanhar</em> o projeto?", "Entregas frequentes evitam a surpresa de descobrir só no fim que não era aquilo."],
-               ["E <em>depois da entrega?</em>", "Pergunte como funciona suporte, manutenção e melhorias."]],
-     "leg": "Salva esse post para usar na próxima vez que for orçar um site, sistema ou aplicativo."},
-
-    {"f": "dor", "k": "Cliente que some", "h": "Cliente que compra <em>uma vez</em> e some?", "sub": "Vender de novo para quem já comprou custa bem menos.",
-     "caos": ["Lista de contatos", "Cliente sumido", "Sem histórico"],
-     "itens": [["Você não sabe <em>quem não voltou</em>", "Sem histórico de compras, o cliente sumido só é lembrado quando já está no concorrente."],
-               ["Contato <em>só quando dá tempo</em>", "Mandar mensagem para cada cliente na mão não escala, então simplesmente não acontece."],
-               ["Nenhum motivo <em>para voltar</em>", "Sem programa de fidelidade ou oferta certa, a próxima compra fica pro acaso."]],
-     "sol": {"h": "Com um CRM <em>simples:</em>", "itens": ["Histórico completo de cada cliente", "Lista de quem não volta há X dias", "Lembretes e mensagens automáticas", "Programa de fidelidade do seu jeito"]},
-     "leg": "Conquistar cliente novo é caro. Fazer quem já comprou voltar pode ser automático. Arrasta pro lado."},
-
-    {"f": "frase", "claro": true, "h": "O melhor sistema é o que se adapta <em>a você</em>, não o contrário.", "sub": "Software sob medida para o jeito que a sua empresa trabalha.",
-     "leg": "Programa pronto obriga sua equipe a mudar a rotina para caber nele. Sistema sob medida é desenhado em cima da sua rotina."},
-
-    {"f": "mockup", "k": "Painel de gestão", "h": "Os números da empresa <em>na palma da mão.</em>", "sub": "Faturamento, despesas e resultado atualizados em tempo real, no computador e no celular.", "tela": "financeiro",
-     "leg": "Imagina abrir o celular e ver como está o mês, sem pedir relatório para ninguém. É isso que um bom painel de gestão faz."},
-
-    {"f": "institucional", "k": "Segurança", "pre": "Seus dados", "h": "<em>protegidos</em> de verdade", "sub": "Segurança não é extra. É o ponto de partida de todo projeto.",
-     "itens": [["Dados <em>criptografados</em>", "As informações da sua empresa e dos seus clientes ficam protegidas."],
-               ["Boas práticas de <em>LGPD</em>", "Cada pessoa vê só o que precisa ver, com acesso controlado por perfil."],
-               ["<em>Backups</em> automáticos", "Se algo der errado, seus dados estão guardados e podem ser recuperados."],
-               ["Código <em>revisado</em>", "Atualizações frequentes e revisão de código antes de ir ao ar."]],
-     "leg": "Planilha no computador de alguém e dado no grupo do WhatsApp não são seguros. Arrasta e veja como a Armetec cuida disso."},
-
-    {"f": "dor", "k": "Orçamentos", "h": "Seu orçamento demora <em>um dia</em> pra sair?", "sub": "Enquanto isso, o cliente já pediu pra outro.",
-     "caos": ["Orçamento_modelo.docx", "Tabela de preços antiga", "Calculadora"],
-     "itens": [["Montado <em>na mão</em>", "Copia o modelo, troca o nome, recalcula tudo e confere se o preço está atualizado."],
-               ["<em>Sem padrão</em> na equipe", "Cada vendedor faz de um jeito, com um preço diferente."],
-               ["Nenhum <em>acompanhamento</em>", "O orçamento é enviado e ninguém sabe se o cliente abriu ou respondeu."]],
-     "sol": {"h": "Com orçamento <em>automático:</em>", "itens": ["Orçamento pronto em minutos, com a sua marca", "Preços e regras sempre atualizados", "Envio por link ou WhatsApp", "Aviso para fazer o follow-up"]},
-     "leg": "Quem responde primeiro tem mais chance de fechar. Arrasta pro lado e veja como agilizar seus orçamentos."},
-
-    {"f": "frase", "h": "Atendimento bom é falar <em>com quem faz.</em>", "sub": "Sem ticket, sem robô, sem fila: direto com o time que desenvolveu seu projeto.",
-     "leg": "Você manda uma mensagem e fala com a mesma equipe que fez seu site ou sistema."},
-
-    {"f": "mockup", "k": "Sites", "h": "Um site que funciona <em>como app</em> no celular.", "sub": "Rápido, instalável na tela inicial e pronto para receber clientes pelo WhatsApp.", "tela": "site",
-     "telaExtra": {"marca": "Estúdio Fit", "h": "Treine com <em>quem entende</em> de você"},
-     "leg": "Todo site da Armetec é entregue como PWA: abre rápido, pode ser instalado na tela inicial e funciona bem em qualquer celular."},
-
-    {"f": "institucional", "k": "Para quem é", "pre": "A Armetec", "h": "é <em>para você</em> se…", "sub": "Tecnologia acessível para pequenas e médias empresas, com qualidade de grandes projetos.",
-     "itens": [["Sua rotina <em>não cabe</em> em programa pronto", "Você já testou sistemas genéricos e sempre falta alguma coisa."],
-               ["Você quer <em>sair da planilha</em>", "A empresa cresceu e as planilhas viraram um quebra-cabeça."],
-               ["Seu site <em>não te representa</em>", "Ele existe, mas está desatualizado, lento ou não traz contatos."],
-               ["Você tem uma <em>ideia de produto</em>", "Um app ou plataforma que você quer tirar do papel."]],
-     "leg": "Se você se identificou com pelo menos um desses pontos, a gente precisa conversar."},
-
-    {"f": "dor", "k": "Equipe", "h": "Você descobre os problemas da equipe <em>só no fim do mês?</em>", "sub": "Sem visibilidade, a gestão vira apagar incêndio.",
-     "caos": ["Quadro de avisos", "Grupo da equipe", "Tarefa esquecida"],
-     "itens": [["Tarefa combinada <em>e esquecida</em>", "Foi falada na reunião, mas ninguém anotou quem ia fazer."],
-               ["Você <em>pergunta tudo</em>", "Para saber como está um pedido, precisa chamar alguém e esperar resposta."],
-               ["Comissão e meta <em>na mão</em>", "Fechar o mês vira uma discussão de números."]],
-     "sol": {"h": "Com a equipe <em>no sistema:</em>", "itens": ["Tarefas com responsável e prazo", "Status de cada pedido em tempo real", "Metas e comissões calculadas sozinhas", "Cada um acessa pelo próprio celular"]},
-     "leg": "Gestão de equipe não precisa ser na base da cobrança. Com a informação no lugar certo, todo mundo sabe o que fazer."},
-
-    {"f": "frase", "claro": true, "h": "Sua ideia não precisa ficar <em>só no papel.</em>", "sub": "A gente ajuda a transformar em site, sistema ou aplicativo.",
-     "leg": "Toda plataforma que você usa hoje começou como uma ideia rabiscada. Qual é a sua?"},
-
-    {"f": "mockup", "k": "Clínicas e estúdios", "h": "Menos falta, <em>mais atendimento.</em>", "sub": "Lembretes automáticos e confirmação de horário para a sua agenda nunca ficar vazia.", "tela": "agenda",
-     "leg": "Cada falta é um horário que não volta. Com confirmação e lembrete automático, o cliente lembra e você não perde tempo correndo atrás."},
-
-    {"f": "institucional", "k": "Sem amarras", "pre": "O projeto", "h": "é <em>seu</em>. De verdade.", "sub": "Ao final, você recebe tudo. Sem dependência da Armetec.",
-     "itens": [["<em>Código-fonte</em>", "Todo o código do seu site ou sistema é entregue para você."],
-               ["<em>Acessos</em>", "Domínio, hospedagem e contas ficam no nome da sua empresa."],
-               ["<em>Documentação</em>", "Como funciona, como publicar e como evoluir, tudo explicado."],
-               ["Você <em>escolhe</em> ficar", "Se continuar com a gente, é porque o trabalho vale a pena, não porque está preso."]],
-     "leg": "Já ficou refém de alguma empresa de tecnologia? Aqui o combinado é outro."},
-
-    {"f": "dor", "k": "Estoque", "h": "Vendeu um produto que <em>não tinha</em> no estoque?", "sub": "Quando o controle é manual, isso acontece mais do que deveria.",
-     "caos": ["Contagem no papel", "Planilha de estoque", "Pedido sem produto"],
-     "itens": [["Estoque <em>desatualizado</em>", "A venda acontece, mas a baixa no estoque fica para depois. E o depois não chega."],
-               ["Compra <em>no chute</em>", "Sem histórico, você compra de mais o que não vende e falta o que sai."],
-               ["Contagem que <em>não bate</em>", "Todo inventário é uma surpresa, e quase nunca boa."]],
-     "sol": {"h": "Com estoque <em>integrado:</em>", "itens": ["Baixa automática a cada venda", "Aviso de estoque baixo", "Histórico do que mais vende", "Loja online e balcão no mesmo controle"]},
-     "leg": "Estoque é dinheiro parado. Controlar bem é vender mais e comprar melhor. Arrasta pro lado."},
-
-    {"f": "frase", "h": "Rápido e bem feito <em>não são opostos.</em>", "sub": "Entregas semanais e código testado antes de ir ao ar.",
-     "leg": "Dá para entregar rápido sem abrir mão da qualidade. O segredo é processo: etapas curtas, testes e você acompanhando tudo."},
-
-    {"f": "mockup", "k": "Gestão", "h": "Tudo da sua empresa <em>em um só lugar.</em>", "sub": "Clientes, equipe, orçamentos e financeiro conectados, sem planilha solta.", "tela": "financeiro",
-     "leg": "Quando cada informação mora num arquivo diferente, a gestão vira caça ao tesouro. Um sistema une tudo."},
-
-    {"f": "institucional", "k": "Na prática", "pre": "O que dá pra", "h": "<em>automatizar</em> na sua empresa", "sub": "Tarefas repetitivas que um sistema faz sozinho.",
-     "itens": [["Lembretes e <em>confirmações</em>", "Mensagem automática antes do horário marcado ou do vencimento."],
-               ["<em>Relatórios</em> do mês", "Faturamento, despesas e resultado prontos, sem montar planilha."],
-               ["<em>Cálculos</em> chatos", "Comissões, descontos, taxas e impostos calculados na hora."],
-               ["<em>Integrações</em>", "Seu sistema conversando com as ferramentas que você já usa."]],
-     "leg": "Se uma tarefa é repetitiva e segue sempre a mesma regra, ela provavelmente pode ser automatizada."},
-
-    {"f": "dor", "k": "Atendimento", "h": "Cliente perguntando <em>\"e aí, como está?\"</em> o dia todo?", "sub": "Quando o cliente não vê o andamento, ele pergunta. Muito.",
-     "caos": ["Status do pedido?", "Já ficou pronto?", "Me dá uma posição"],
-     "itens": [["Sua equipe vira <em>central de recados</em>", "Metade do dia vai em responder onde está cada pedido."],
-               ["Informação <em>desencontrada</em>", "Um fala uma coisa, outro fala outra. O cliente perde a confiança."],
-               ["Nenhum <em>registro</em>", "O que foi combinado ficou perdido em mensagens e ligações."]],
-     "sol": {"h": "Com um <em>portal do cliente:</em>", "itens": ["O cliente acompanha o status sozinho", "Arquivos, propostas e histórico num lugar só", "Avisos automáticos a cada etapa", "Sua equipe livre para trabalhar"]},
-     "leg": "Transparência reduz mensagem e aumenta confiança. Arrasta pro lado."},
-
-    {"f": "frase", "claro": true, "h": "Cada hora no <em>retrabalho</em> é uma hora a menos vendendo.", "sub": "Automatize o repetitivo. Foque no que faz sua empresa crescer.",
-     "leg": "Quanto tempo por semana sua equipe gasta com tarefas que um sistema faria sozinho?"},
-
-    {"f": "mockup", "k": "Vendas", "h": "Nenhum lead <em>esquecido</em> no WhatsApp.", "sub": "Cada contato vira uma oportunidade no funil, com lembrete de retorno para o vendedor.", "tela": "vendas",
-     "leg": "Quantos clientes pediram orçamento e nunca receberam retorno? Com um CRM, cada contato tem dono e prazo."},
-
-    {"f": "institucional", "k": "Bastidores", "pre": "Como nasce", "h": "um <em>sistema</em> sob medida", "sub": "Um olhar por dentro do nosso processo.",
-     "itens": [["<em>Escuta</em>", "Primeiro entendemos como sua empresa funciona hoje, com seus atalhos e gargalos."],
-               ["<em>Desenho</em>", "Criamos as telas para você aprovar antes de escrever código."],
-               ["<em>Construção</em>", "Sprints curtos, entregas semanais e código testado antes de ir ao ar."],
-               ["<em>Lançamento</em>", "Publicamos, treinamos sua equipe e acompanhamos as primeiras semanas de uso."]],
-     "leg": "Sistema bom não começa no código, começa na conversa. Arrasta e veja o caminho."}
-  ]
+ "inicio": "2026-11-17",
+ "cadaDias": 2,
+ "horarios": [
+  "11:30"
+ ],
+ "site": "armetec.com.br",
+ "insta": "@armetec.br",
+ "posts": [
+  {
+   "f": "institucional",
+   "k": "Quem somos",
+   "pre": "Prazer,",
+   "h": "Somos a <em>Armetec</em>",
+   "sub": "Criamos sites, sistemas e aplicativos para que o dia a dia da sua empresa fique mais simples.",
+   "itens": [
+    [
+     "Dois sócios, <em>um propósito</em>",
+     "A Armetec nasceu da vontade de levar tecnologia de qualidade para empresas que precisam estar bem no digital, sem a burocracia e o custo de grandes agências.",
+     null,
+     "lista"
+    ],
+    [
+     "100% <em>online</em>",
+     "Atendemos empresas de todo o Brasil com reuniões online, grupo direto no WhatsApp e relatórios de progresso.",
+     null,
+     "chat"
+    ],
+    [
+     "Do design <em>ao código</em>",
+     "Cada site ou sistema é criado do zero para o seu negócio. Nada de template genérico.",
+     null,
+     "codigo"
+    ],
+    [
+     "Com você <em>depois da entrega</em>",
+     "Acompanhamos seu produto depois do lançamento, com manutenção e evolução.",
+     null,
+     "notificacoes"
+    ]
+   ],
+   "leg": "Muito prazer! A Armetec cria sites, sistemas e aplicativos sob medida para empresas que querem crescer sem complicação. Arrasta pro lado e conhece a gente."
+  },
+  {
+   "f": "frase",
+   "h": "Site lento <em>perde cliente.</em>",
+   "sub": "Se demora no celular, a pessoa volta pro Google e clica no próximo.",
+   "fig": "notebook",
+   "cena": {
+    "chip": "Abre em 1,2 s",
+    "chipSub": "antes: 8 segundos"
+   }
+  },
+  {
+   "f": "mockup",
+   "k": "Sistema sob medida",
+   "h": "Um sistema do jeito que <em>sua empresa trabalha.</em>",
+   "sub": "Agenda, equipe e financeiro em um só lugar.",
+   "tela": "financeiro",
+   "fig": "tablet",
+   "leg": "Nada de se adaptar a um programa pronto. Na Armetec o sistema é desenhado em cima do jeito que a sua empresa já trabalha."
+  },
+  {
+   "f": "dor",
+   "k": "Você ainda faz isso?",
+   "h": "Sua empresa ainda roda na <em>planilha?</em>",
+   "sub": "Se a resposta é sim, esse post é pra você.",
+   "caos": [
+    "planilha_final_v3.xlsx",
+    "Caderno de pedidos",
+    "WhatsApp · 47 mensagens"
+   ],
+   "itens": [
+    [
+     "Cada um tem <em>uma versão</em> da planilha",
+     "Ninguém sabe qual é a certa, alguém apaga uma fórmula e o número do mês muda sozinho."
+    ],
+    [
+     "Informação <em>espalhada</em> no WhatsApp",
+     "Pedido num grupo, orçamento no outro, recado no áudio. Achar algo vira uma caça ao tesouro."
+    ],
+    [
+     "Você é o <em>gargalo</em>",
+     "Tudo depende de você lembrar, conferir e repassar. Se você para, a empresa para."
+    ]
+   ],
+   "sol": {
+    "h": "Com um sistema <em>sob medida:</em>",
+    "itens": [
+     "Todo mundo vê a mesma informação, em tempo real",
+     "Cada pessoa acessa só o que precisa",
+     "Relatórios prontos, sem montar planilha",
+     "Funciona no computador e no celular"
+    ]
+   },
+   "leg": "Planilha é ótima pra começar. O problema é quando a empresa cresce e ela vira o sistema principal. Arrasta pro lado e veja os sinais."
+  },
+  {
+   "f": "frase",
+   "h": "Planilha <em>não é sistema.</em>",
+   "sub": "Ela ajuda a começar, mas trava quando a empresa cresce.",
+   "fig": "lista"
+  },
+  {
+   "f": "mockup",
+   "k": "Sites",
+   "h": "Seu site deveria <em>trazer clientes.</em>",
+   "sub": "Rápido no celular, fácil de achar no Google e com o WhatsApp a um toque.",
+   "tela": "site",
+   "fig": "duo",
+   "leg": "Um site que demora no celular ou que ninguém encontra é um cartão de visita guardado na gaveta."
+  },
+  {
+   "f": "institucional",
+   "k": "Como trabalhamos",
+   "pre": "Do zero",
+   "h": "ao <em>ar</em> em 4 etapas",
+   "sub": "Seu projeto, sem complicação: você sabe exatamente em que pé está cada etapa.",
+   "itens": [
+    [
+     "<em>Entender</em> o seu negócio",
+     "Conversamos sobre sua rotina, seus problemas e onde você quer chegar. Só depois pensamos em tela.",
+     null,
+     "busca"
+    ],
+    [
+     "Escopo e valor <em>antes de começar</em>",
+     "Você recebe o que será feito, o prazo e o investimento. Sem surpresas no meio do caminho.",
+     null,
+     "documento"
+    ],
+    [
+     "Entregas <em>toda semana</em>",
+     "Demonstrações semanais e um canal direto com quem está desenvolvendo. Você acompanha tudo de perto.",
+     null,
+     "agenda"
+    ],
+    [
+     "No ar e <em>evoluindo</em>",
+     "Publicamos, monitoramos e seguimos com manutenção e melhorias depois do lançamento.",
+     null,
+     "grafico"
+    ]
+   ],
+   "leg": "Muita gente tem medo de contratar um sistema porque já ouviu história de projeto que nunca termina. Aqui é assim que funciona."
+  },
+  {
+   "f": "frase",
+   "h": "Responda <em>primeiro.</em>",
+   "sub": "Quem responde antes tem mais chance de fechar a venda.",
+   "fig": "chat"
+  },
+  {
+   "f": "mockup",
+   "k": "Agenda online",
+   "h": "Agenda cheia, <em>sem trocar mensagem.</em>",
+   "sub": "O cliente marca sozinho e o sistema confirma e lembra por você.",
+   "tela": "agenda",
+   "fig": "agenda",
+   "leg": "Seu cliente quer marcar na hora que lembra. Com agenda online ele marca sozinho e você só atende."
+  },
+  {
+   "f": "dor",
+   "k": "Agenda bagunçada",
+   "h": "Cliente marcando pelo <em>WhatsApp</em> às 23h?",
+   "sub": "A agenda manual cobra caro, e a conta chega em horário duplicado.",
+   "caos": [
+    "Agenda de papel",
+    "WhatsApp · 12 não lidas",
+    "Horário duplicado"
+   ],
+   "itens": [
+    [
+     "Você responde <em>no meio do atendimento</em>",
+     "Para o que está fazendo, responde, confere a agenda e torce para não ter esquecido nada."
+    ],
+    [
+     "Dois clientes <em>no mesmo horário</em>",
+     "Anotou num lugar, esqueceu no outro. Resultado: alguém espera, alguém vai embora."
+    ],
+    [
+     "Falta sem aviso",
+     "Sem lembrete automático, o cliente esquece e o horário fica vazio."
+    ]
+   ],
+   "sol": {
+    "h": "Com agendamento <em>online:</em>",
+    "itens": [
+     "O cliente escolhe o horário sozinho, por um link",
+     "O sistema não deixa marcar dois no mesmo horário",
+     "Lembrete antes do atendimento",
+     "Você vê a agenda da equipe inteira no celular"
+    ]
+   },
+   "case": {
+    "k": "Case Armetec",
+    "t": "Foi assim que nasceu o <em>Titan Barber</em>",
+    "p": "Sistema de gestão para barbearias criado pela Armetec: agenda online, comissões, caixa e fidelidade.",
+    "tela": "barbearia"
+   },
+   "leg": "Agenda no WhatsApp parece de graça, mas custa horário perdido, cliente irritado e você preso no celular. Arrasta e vê como resolver."
+  },
+  {
+   "f": "frase",
+   "h": "Lembrete <em>evita falta.</em>",
+   "sub": "Uma mensagem automática antes do horário faz o cliente lembrar.",
+   "fig": "notificacoes"
+  },
+  {
+   "f": "mockup",
+   "k": "CRM",
+   "h": "Saiba onde está <em>cada venda.</em>",
+   "sub": "Leads, propostas e metas da equipe num painel só.",
+   "tela": "vendas",
+   "fig": "grafico",
+   "cena": {
+    "titulo": "Vendas do mês",
+    "valor": "R$ 92 mil",
+    "chip": "Fechado +27%"
+   },
+   "leg": "Lead que ninguém retornou é venda que foi pro concorrente. Com um CRM do jeito da sua empresa, nenhum contato fica esquecido."
+  },
+  {
+   "f": "institucional",
+   "k": "O que fazemos",
+   "pre": "Do site",
+   "h": "ao <em>sistema</em>, um só time",
+   "sub": "Tudo o que sua empresa precisa no digital, feito pelas mesmas pessoas.",
+   "itens": [
+    [
+     "<em>Sites</em> que vendem",
+     "Sites institucionais, landing pages e lojas virtuais otimizados para Google, celular e conversão.",
+     null,
+     "duo"
+    ],
+    [
+     "<em>Sistemas</em> que organizam",
+     "ERPs, CRMs, agendamentos, portais de clientes e automações que eliminam planilha e retrabalho.",
+     null,
+     "tablet"
+    ],
+    [
+     "<em>Aplicativos</em> no celular",
+     "Todo projeto é entregue como PWA: instala direto na tela inicial, sem depender de loja de apps.",
+     null,
+     "trio"
+    ],
+    [
+     "<em>Infraestrutura</em> que não para",
+     "Nuvem, publicação automatizada, monitoramento e backups para seu sistema ficar no ar.",
+     null,
+     "seguranca"
+    ]
+   ],
+   "leg": "Site com uma empresa, sistema com outra, app com uma terceira... e nenhuma conversa com a outra. Aqui é um time só, do começo ao fim."
+  },
+  {
+   "f": "frase",
+   "h": "Esteja <em>no Google.</em>",
+   "sub": "Quem não aparece na busca não existe para o cliente novo.",
+   "fig": "busca",
+   "cena": {
+    "busca": "loja de móveis perto de mim"
+   }
+  },
+  {
+   "f": "mockup",
+   "k": "Loja e estoque",
+   "h": "Pedidos e estoque <em>sem caderno.</em>",
+   "sub": "Baixa automática a cada venda e aviso de estoque baixo.",
+   "tela": "pedidos",
+   "fig": "estoque",
+   "leg": "Vender online é metade do trabalho. A outra metade é controlar estoque e entregar sem erro, e isso também pode ser automático."
+  },
+  {
+   "f": "dor",
+   "k": "Retrabalho",
+   "h": "Quanto tempo sua equipe perde <em>digitando a mesma coisa?</em>",
+   "sub": "Retrabalho não aparece no balanço, mas pesa na folha.",
+   "caos": [
+    "Copiar e colar",
+    "Planilha de controle",
+    "Relatório manual"
+   ],
+   "itens": [
+    [
+     "O mesmo dado <em>em 3 lugares</em>",
+     "Cadastra o cliente na planilha, depois no orçamento, depois na nota. Cada cópia é uma chance de errar."
+    ],
+    [
+     "Relatório que leva <em>uma tarde</em>",
+     "Todo fim de mês alguém junta números de vários arquivos para montar um resumo."
+    ],
+    [
+     "Erro que só aparece <em>tarde demais</em>",
+     "Valor digitado errado, pedido duplicado, cliente cobrado duas vezes."
+    ]
+   ],
+   "sol": {
+    "h": "Com <em>automação:</em>",
+    "itens": [
+     "Cada informação é digitada uma vez só",
+     "Relatórios saem prontos, na hora",
+     "O sistema avisa quando algo não bate",
+     "Sua equipe foca no que gera resultado"
+    ]
+   },
+   "leg": "Se alguém da sua equipe passa horas copiando informação de um lugar pro outro, isso tem solução. Arrasta pro lado."
+  },
+  {
+   "f": "frase",
+   "h": "Lucro não é <em>faturamento.</em>",
+   "sub": "Desconte taxas, comissões e custos antes de comemorar.",
+   "fig": "grafico",
+   "cena": {
+    "titulo": "Lucro real do mês",
+    "valor": "R$ 7.950"
+   }
+  },
+  {
+   "f": "mockup",
+   "k": "Titan Barber",
+   "h": "Criamos o <em>Titan Barber.</em>",
+   "sub": "Sistema completo para barbearias: agenda online, comissões, caixa e fidelidade.",
+   "tela": "barbearia",
+   "fig": "celular",
+   "cena": {
+    "chip": "Comissão calculada",
+    "chipSub": "fechamento em 1 toque",
+    "chipIc": "dinheiro"
+   },
+   "leg": "O Titan Barber é um sistema de gestão para barbearias criado do zero pela Armetec. É o mesmo cuidado que colocamos em cada projeto de cliente."
+  },
+  {
+   "f": "institucional",
+   "k": "Diferenciais",
+   "pre": "Por que a",
+   "h": "<em>Armetec?</em>",
+   "sub": "O que você pode esperar de nós em todo projeto.",
+   "itens": [
+    [
+     "Preço, prazo e escopo <em>claros</em>",
+     "Tudo definido desde o primeiro contato. Sem surpresas no meio do projeto.",
+     null,
+     "documento"
+    ],
+    [
+     "Você fala com <em>quem desenvolve</em>",
+     "Sem ticket, sem robô, sem fila de atendimento. Direto com o time que fez seu projeto.",
+     null,
+     "chat"
+    ],
+    [
+     "O código <em>é seu</em>",
+     "Ao final você recebe o código-fonte, acessos e documentação. Sem amarras e sem dependência.",
+     null,
+     "codigo"
+    ],
+    [
+     "<em>Segurança</em> desde o início",
+     "Dados criptografados, boas práticas de LGPD, código revisado e atualizações frequentes.",
+     null,
+     "seguranca"
+    ]
+   ],
+   "leg": "Antes de contratar qualquer empresa de tecnologia, faça essas 4 perguntas. A gente responde todas aqui."
+  },
+  {
+   "f": "frase",
+   "h": "Faça <em>backup.</em>",
+   "sub": "Se o computador quebrar hoje, seus dados estão salvos?",
+   "fig": "seguranca"
+  },
+  {
+   "f": "mockup",
+   "k": "Painel de gestão",
+   "h": "Sua empresa <em>na palma da mão.</em>",
+   "sub": "Faturamento, despesas e resultado em tempo real, no celular.",
+   "tela": "financeiro",
+   "fig": "celular",
+   "cena": {
+    "chip": "Resultado +21%",
+    "chipSub": "atualizado agora",
+    "chipIc": "grafico"
+   },
+   "leg": "Imagina abrir o celular e ver como está o mês, sem pedir relatório para ninguém."
+  },
+  {
+   "f": "dor",
+   "k": "Site parado",
+   "h": "Seu site existe, mas <em>não traz cliente?</em>",
+   "sub": "3 motivos comuns (e o que fazer).",
+   "caos": [
+    "Site de 2016",
+    "Carregando…",
+    "Página não encontrada"
+   ],
+   "itens": [
+    [
+     "Demora pra <em>abrir no celular</em>",
+     "A maioria das visitas vem do celular. Se o site demora alguns segundos, a pessoa volta pro Google e clica no próximo."
+    ],
+    [
+     "<em>Ninguém encontra</em> no Google",
+     "Sem estrutura de SEO, seu site não aparece quando o cliente procura o que você vende."
+    ],
+    [
+     "Não diz <em>o próximo passo</em>",
+     "O visitante gostou, mas não sabe como pedir orçamento. Sem botão claro, ele vai embora."
+    ]
+   ],
+   "sol": {
+    "h": "Um site que <em>trabalha por você:</em>",
+    "itens": [
+     "Rápido no celular",
+     "Otimizado para aparecer no Google",
+     "WhatsApp e orçamento a um toque",
+     "Indicadores de acesso e contatos"
+    ]
+   },
+   "leg": "Ter site não é o mesmo que ter um site que vende. Arrasta pro lado e confere se o seu tem algum desses problemas."
+  },
+  {
+   "f": "frase",
+   "h": "Orçamento rápido <em>fecha mais.</em>",
+   "sub": "Padronize preços e envie em minutos, com a sua marca.",
+   "fig": "documento"
+  },
+  {
+   "f": "mockup",
+   "k": "Aplicativos",
+   "h": "Seu sistema <em>vira app.</em>",
+   "sub": "Todo projeto sai como PWA: ícone na tela inicial, sem loja de apps.",
+   "fig": "trio",
+   "leg": "Com PWA, você manda um link e a pessoa instala o sistema como aplicativo, no iPhone, no Android e no computador."
+  },
+  {
+   "f": "institucional",
+   "k": "PWA",
+   "pre": "Seu sistema",
+   "h": "na <em>tela inicial</em> do celular",
+   "sub": "Todo projeto da Armetec é entregue como PWA. Entenda o que isso significa.",
+   "itens": [
+    [
+     "O que é <em>PWA?</em>",
+     "É um site que funciona como aplicativo: tem ícone na tela inicial, abre em tela cheia e é rápido.",
+     null,
+     "celular"
+    ],
+    [
+     "Sem <em>loja de apps</em>",
+     "Não precisa publicar na App Store ou no Google Play. Você manda um link e a pessoa instala.",
+     null,
+     "trio"
+    ],
+    [
+     "Atualiza <em>sozinho</em>",
+     "Toda melhoria chega para todo mundo na hora, sem pedir para ninguém atualizar nada.",
+     null,
+     "notificacoes"
+    ],
+    [
+     "Um código, <em>todos os aparelhos</em>",
+     "Funciona no iPhone, no Android e no computador. Menos custo, mesmo resultado.",
+     null,
+     "duo"
+    ]
+   ],
+   "leg": "Quer um app para sua empresa mas acha que é caro e complicado? Talvez você precise de um PWA. Arrasta pro lado."
+  },
+  {
+   "f": "frase",
+   "h": "Seu cliente está <em>no celular.</em>",
+   "sub": "Se o site não funciona bem no celular, ele não funciona.",
+   "fig": "celular",
+   "cena": {
+    "tela": "site",
+    "chip": "70% das visitas",
+    "chipSub": "vêm do celular",
+    "chipIc": "app"
+   }
+  },
+  {
+   "f": "mockup",
+   "k": "Lembretes",
+   "h": "Menos falta, <em>mais atendimento.</em>",
+   "sub": "Confirmação e lembrete automático antes de cada horário.",
+   "tela": "agenda",
+   "fig": "notificacoes",
+   "leg": "Cada falta é um horário que não volta. Com lembrete automático, o cliente lembra e você não corre atrás."
+  },
+  {
+   "f": "dor",
+   "k": "Financeiro",
+   "h": "Faturou bem, mas <em>não sobrou nada?</em>",
+   "sub": "O problema pode não ser a venda. Pode ser o controle.",
+   "caos": [
+    "Extrato do banco",
+    "Contas a pagar.xlsx",
+    "Notinha perdida"
+   ],
+   "itens": [
+    [
+     "Entrada e saída <em>misturadas</em>",
+     "Dinheiro da empresa e gasto do dia a dia no mesmo lugar. No fim do mês, ninguém sabe o que foi o quê."
+    ],
+    [
+     "Custos <em>escondidos</em>",
+     "Taxa de maquininha, comissão, imposto, assinatura esquecida. Pequenos valores que somados viram muito."
+    ],
+    [
+     "Decisão <em>no escuro</em>",
+     "Sem número confiável, contratar, investir ou dar desconto vira chute."
+    ]
+   ],
+   "sol": {
+    "h": "Com o financeiro <em>no sistema:</em>",
+    "itens": [
+     "Fluxo de caixa atualizado todo dia",
+     "Custos e taxas descontados automaticamente",
+     "Lucro real do mês, sem conta de cabeça",
+     "Comparação com os meses anteriores"
+    ]
+   },
+   "leg": "Faturamento é vaidade, lucro é sanidade. Se você não sabe quanto sobrou no mês passado, arrasta pro lado."
+  },
+  {
+   "f": "frase",
+   "h": "Automatize <em>o repetitivo.</em>",
+   "sub": "Tarefa que segue sempre a mesma regra, um sistema faz por você.",
+   "fig": "codigo"
+  },
+  {
+   "f": "mockup",
+   "k": "Organização",
+   "h": "Tudo da empresa <em>em um só lugar.</em>",
+   "sub": "Tarefas, responsáveis e prazos que toda a equipe enxerga.",
+   "fig": "lista",
+   "leg": "Quando cada informação mora num arquivo diferente, a gestão vira caça ao tesouro. Um sistema une tudo."
+  },
+  {
+   "f": "institucional",
+   "k": "Antes de contratar",
+   "pre": "4 perguntas",
+   "h": "antes de contratar um <em>sistema</em>",
+   "sub": "Evite dor de cabeça e dinheiro jogado fora.",
+   "itens": [
+    [
+     "O código <em>fica com você?</em>",
+     "Se a empresa sumir amanhã, você consegue continuar? Exija código-fonte, acessos e documentação.",
+     null,
+     "codigo"
+    ],
+    [
+     "Quanto custa <em>de verdade?</em>",
+     "Escopo, prazo e valor precisam estar no papel antes de começar.",
+     null,
+     "documento"
+    ],
+    [
+     "Você vai <em>acompanhar</em> o projeto?",
+     "Entregas frequentes evitam a surpresa de descobrir só no fim que não era aquilo.",
+     null,
+     "lista"
+    ],
+    [
+     "E <em>depois da entrega?</em>",
+     "Pergunte como funciona suporte, manutenção e melhorias.",
+     null,
+     "notificacoes"
+    ]
+   ],
+   "leg": "Salva esse post para usar na próxima vez que for orçar um site, sistema ou aplicativo."
+  },
+  {
+   "f": "frase",
+   "h": "Estoque no papel <em>some.</em>",
+   "sub": "Baixa automática a cada venda evita vender o que não tem.",
+   "fig": "estoque"
+  },
+  {
+   "f": "mockup",
+   "k": "Atendimento",
+   "h": "Nenhum cliente <em>sem resposta.</em>",
+   "sub": "Respostas automáticas e histórico de cada conversa.",
+   "fig": "chat",
+   "leg": "Quem responde primeiro tem mais chance de fechar. Automatize o começo da conversa e não perca mais nenhum contato."
+  },
+  {
+   "f": "dor",
+   "k": "Cliente que some",
+   "h": "Cliente que compra <em>uma vez</em> e some?",
+   "sub": "Vender de novo para quem já comprou custa bem menos.",
+   "caos": [
+    "Lista de contatos",
+    "Cliente sumido",
+    "Sem histórico"
+   ],
+   "itens": [
+    [
+     "Você não sabe <em>quem não voltou</em>",
+     "Sem histórico de compras, o cliente sumido só é lembrado quando já está no concorrente."
+    ],
+    [
+     "Contato <em>só quando dá tempo</em>",
+     "Mandar mensagem para cada cliente na mão não escala, então simplesmente não acontece."
+    ],
+    [
+     "Nenhum motivo <em>para voltar</em>",
+     "Sem programa de fidelidade ou oferta certa, a próxima compra fica pro acaso."
+    ]
+   ],
+   "sol": {
+    "h": "Com um CRM <em>simples:</em>",
+    "itens": [
+     "Histórico completo de cada cliente",
+     "Lista de quem não volta há X dias",
+     "Lembretes e mensagens automáticas",
+     "Programa de fidelidade do seu jeito"
+    ]
+   },
+   "leg": "Conquistar cliente novo é caro. Fazer quem já comprou voltar pode ser automático. Arrasta pro lado."
+  },
+  {
+   "f": "frase",
+   "h": "Agenda online <em>trabalha 24h.</em>",
+   "sub": "O cliente marca de madrugada e você só confirma de manhã.",
+   "fig": "agenda"
+  },
+  {
+   "f": "mockup",
+   "k": "Orçamentos",
+   "h": "Orçamento pronto <em>em minutos.</em>",
+   "sub": "Com a sua marca, preços sempre atualizados e envio pelo WhatsApp.",
+   "fig": "documento",
+   "leg": "Enquanto o orçamento é montado na mão, o cliente pede pra outro. Padronize e envie em minutos."
+  },
+  {
+   "f": "institucional",
+   "k": "Segurança",
+   "pre": "Seus dados",
+   "h": "<em>protegidos</em> de verdade",
+   "sub": "Segurança não é extra. É o ponto de partida de todo projeto.",
+   "itens": [
+    [
+     "Dados <em>criptografados</em>",
+     "As informações da sua empresa e dos seus clientes ficam protegidas.",
+     null,
+     "seguranca"
+    ],
+    [
+     "Boas práticas de <em>LGPD</em>",
+     "Cada pessoa vê só o que precisa ver, com acesso controlado por perfil.",
+     null,
+     "tablet"
+    ],
+    [
+     "<em>Backups</em> automáticos",
+     "Se algo der errado, seus dados estão guardados e podem ser recuperados.",
+     null,
+     "notificacoes"
+    ],
+    [
+     "Código <em>revisado</em>",
+     "Atualizações frequentes e revisão de código antes de ir ao ar.",
+     null,
+     "codigo"
+    ]
+   ],
+   "leg": "Planilha no computador de alguém e dado no grupo do WhatsApp não são seguros. Arrasta e veja como a Armetec cuida disso."
+  },
+  {
+   "f": "frase",
+   "h": "O código <em>precisa ser seu.</em>",
+   "sub": "Ao contratar, exija código-fonte, acessos e documentação.",
+   "fig": "codigo",
+   "cena": {
+    "arquivo": "contrato.ts",
+    "chip": "Código entregue",
+    "chipSub": "sem dependência",
+    "codigo": [
+     [
+      [
+       "// entrega do projeto",
+       "#5B6B8C"
+      ]
+     ],
+     [
+      [
+       "entregar",
+       "#F2C46D"
+      ],
+      [
+       "(",
+       "#9AA7C7"
+      ],
+      [
+       "\"código-fonte\"",
+       "#7EE0A1"
+      ],
+      [
+       ")",
+       "#9AA7C7"
+      ]
+     ],
+     [
+      [
+       "entregar",
+       "#F2C46D"
+      ],
+      [
+       "(",
+       "#9AA7C7"
+      ],
+      [
+       "\"acessos\"",
+       "#7EE0A1"
+      ],
+      [
+       ")",
+       "#9AA7C7"
+      ]
+     ],
+     [
+      [
+       "entregar",
+       "#F2C46D"
+      ],
+      [
+       "(",
+       "#9AA7C7"
+      ],
+      [
+       "\"documentação\"",
+       "#7EE0A1"
+      ],
+      [
+       ")",
+       "#9AA7C7"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "f": "mockup",
+   "k": "Segurança",
+   "h": "Seus dados <em>protegidos.</em>",
+   "sub": "Criptografia, backup e acesso por perfil em todo projeto.",
+   "fig": "seguranca",
+   "leg": "Planilha no computador de alguém não é segura. Em todo projeto da Armetec a segurança vem desde o início."
+  },
+  {
+   "f": "dor",
+   "k": "Orçamentos",
+   "h": "Seu orçamento demora <em>um dia</em> pra sair?",
+   "sub": "Enquanto isso, o cliente já pediu pra outro.",
+   "caos": [
+    "Orçamento_modelo.docx",
+    "Tabela de preços antiga",
+    "Calculadora"
+   ],
+   "itens": [
+    [
+     "Montado <em>na mão</em>",
+     "Copia o modelo, troca o nome, recalcula tudo e confere se o preço está atualizado."
+    ],
+    [
+     "<em>Sem padrão</em> na equipe",
+     "Cada vendedor faz de um jeito, com um preço diferente."
+    ],
+    [
+     "Nenhum <em>acompanhamento</em>",
+     "O orçamento é enviado e ninguém sabe se o cliente abriu ou respondeu."
+    ]
+   ],
+   "sol": {
+    "h": "Com orçamento <em>automático:</em>",
+    "itens": [
+     "Orçamento pronto em minutos, com a sua marca",
+     "Preços e regras sempre atualizados",
+     "Envio por link ou WhatsApp",
+     "Aviso para fazer o follow-up"
+    ]
+   },
+   "leg": "Quem responde primeiro tem mais chance de fechar. Arrasta pro lado e veja como agilizar seus orçamentos."
+  },
+  {
+   "f": "frase",
+   "h": "App <em>sem loja de apps.</em>",
+   "sub": "Com PWA, seu sistema vira ícone na tela inicial por um link.",
+   "fig": "trio"
+  },
+  {
+   "f": "mockup",
+   "k": "Google",
+   "h": "Apareça <em>no Google.</em>",
+   "sub": "Site estruturado para ser encontrado por quem procura o que você vende.",
+   "tela": "site",
+   "fig": "busca",
+   "cena": {
+    "busca": "clínica perto de mim"
+   },
+   "leg": "Antes de te chamar, o cliente pesquisa. O que ele encontra é a primeira impressão da sua empresa."
+  },
+  {
+   "f": "institucional",
+   "k": "Para quem é",
+   "pre": "A Armetec",
+   "h": "é <em>para você</em> se…",
+   "sub": "Tecnologia acessível para pequenas e médias empresas, com qualidade de grandes projetos.",
+   "itens": [
+    [
+     "Sua rotina <em>não cabe</em> em programa pronto",
+     "Você já testou sistemas genéricos e sempre falta alguma coisa.",
+     null,
+     "tablet"
+    ],
+    [
+     "Você quer <em>sair da planilha</em>",
+     "A empresa cresceu e as planilhas viraram um quebra-cabeça.",
+     null,
+     "lista"
+    ],
+    [
+     "Seu site <em>não te representa</em>",
+     "Ele existe, mas está desatualizado, lento ou não traz contatos.",
+     null,
+     "notebook"
+    ],
+    [
+     "Você tem uma <em>ideia de produto</em>",
+     "Um app ou plataforma que você quer tirar do papel.",
+     null,
+     "trio"
+    ]
+   ],
+   "leg": "Se você se identificou com pelo menos um desses pontos, a gente precisa conversar."
+  },
+  {
+   "f": "frase",
+   "h": "Dado espalhado é <em>dado perdido.</em>",
+   "sub": "Cliente, pedido e financeiro no mesmo lugar.",
+   "fig": "tablet"
+  },
+  {
+   "f": "mockup",
+   "k": "Automação",
+   "h": "Automações que <em>trabalham por você.</em>",
+   "sub": "Lembretes, relatórios e cálculos feitos sozinhos.",
+   "fig": "codigo",
+   "leg": "Se uma tarefa segue sempre a mesma regra, ela pode ser automática. Sua equipe fica livre para o que gera resultado."
+  },
+  {
+   "f": "dor",
+   "k": "Equipe",
+   "h": "Você descobre os problemas da equipe <em>só no fim do mês?</em>",
+   "sub": "Sem visibilidade, a gestão vira apagar incêndio.",
+   "caos": [
+    "Quadro de avisos",
+    "Grupo da equipe",
+    "Tarefa esquecida"
+   ],
+   "itens": [
+    [
+     "Tarefa combinada <em>e esquecida</em>",
+     "Foi falada na reunião, mas ninguém anotou quem ia fazer."
+    ],
+    [
+     "Você <em>pergunta tudo</em>",
+     "Para saber como está um pedido, precisa chamar alguém e esperar resposta."
+    ],
+    [
+     "Comissão e meta <em>na mão</em>",
+     "Fechar o mês vira uma discussão de números."
+    ]
+   ],
+   "sol": {
+    "h": "Com a equipe <em>no sistema:</em>",
+    "itens": [
+     "Tarefas com responsável e prazo",
+     "Status de cada pedido em tempo real",
+     "Metas e comissões calculadas sozinhas",
+     "Cada um acessa pelo próprio celular"
+    ]
+   },
+   "leg": "Gestão de equipe não precisa ser na base da cobrança. Com a informação no lugar certo, todo mundo sabe o que fazer."
+  },
+  {
+   "f": "frase",
+   "h": "Um botão <em>que vende.</em>",
+   "sub": "Deixe o próximo passo óbvio: WhatsApp a um toque no seu site.",
+   "fig": "duo"
+  },
+  {
+   "f": "mockup",
+   "k": "Sites",
+   "h": "Um site que <em>abre na hora.</em>",
+   "sub": "Leve, moderno e pronto para transformar visita em cliente.",
+   "tela": "site",
+   "fig": "notebook",
+   "telaExtra": {
+    "h": "Seu negócio <em>em destaque</em> na internet"
+   },
+   "leg": "Site lento perde cliente. Os sites da Armetec são feitos para abrir rápido em qualquer celular."
+  }
+ ]
 }

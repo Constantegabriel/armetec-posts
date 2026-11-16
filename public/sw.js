@@ -1,6 +1,6 @@
 // Service worker: abre o app sem internet, guarda os posts do último acesso e mostra as notificações.
 const VERSION = "armetec-posts-v4";
-const SHELL = ["/", "/index.html", "/style.css", "/app.js", "/slides.js", "/estilos.js", "/bg/grade-escura.webp", "/fonts/montserrat.woff2", "/fonts/archivo-900.woff2", "/fonts/jetbrains-400.woff2", "/fonts/jetbrains-700.woff2", "/fonts/inter.woff2", "/fonts/plus-jakarta-bold.ttf", "/fonts/plus-jakarta-extra-bold.ttf",
+const SHELL = ["/", "/index.html", "/style.css", "/app.js", "/slides.js", "/estilos.js", "/cenas.js", "/bg/grade-escura.webp", "/fonts/montserrat.woff2", "/fonts/archivo-900.woff2", "/fonts/jetbrains-400.woff2", "/fonts/jetbrains-700.woff2", "/fonts/inter.woff2", "/fonts/plus-jakarta-bold.ttf", "/fonts/plus-jakarta-extra-bold.ttf",
   "/fonts/manrope-extra-bold.ttf", "/fonts/nasalization-rg.otf", "/manifest.webmanifest", "/favicon.png", "/icons/logo.png", "/icons/icon-192.png"];
 
 self.addEventListener("install", (e) => {

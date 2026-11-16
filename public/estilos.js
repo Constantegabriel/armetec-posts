@@ -148,7 +148,9 @@ SL.kCapa = (ctx, s, i, total) => {
 SL.kItem = (ctx, s, i, total) => {
   darkBg(ctx, i); headDark(ctx, i, total);
   const end = titleBlock(ctx, s.t, s.p, { size: s.t.length > 34 ? 96 : 110 });
-  deviceFor(ctx, s.ic, Math.max(600, end + 40), s.seed || i, s.tela); counter(ctx, i, total);
+  const top = Math.max(600, end + 40);
+  cena(ctx, s.fig || cenaPadrao({ ic: s.ic, tela: s.tela }), { x: MX - 20, y: top, w: MWX + 40, h: H - 170 - top }, "dark", { ic: s.ic, tela: s.tela, seed: s.seed || i, lado: i % 2 ? "esq" : "dir" });
+  counter(ctx, i, total);
 };
 SL.kDorCapa = (ctx, s, i, total) => {
   darkBg(ctx, i); headDark(ctx, i, total);
@@ -258,17 +260,11 @@ SL.bpServico = (ctx, s) => {
   const lines = [[]]; let lw = 0; for (const w of words) { const ww = ctx.measureText(w.t).width; if (/^\s+$/.test(w.t)) { if (lines.at(-1).length) { lines.at(-1).push(w); lw += ww; } continue; } if (lw + ww > W - 180 && lines.at(-1).length) { lines.push([]); lw = 0; } lines.at(-1).push(w); lw += ww; }
   let y = 230; lines.forEach((ln) => { while (ln.length && /^\s+$/.test(ln.at(-1).t)) ln.pop(); let x = 90; ln.forEach((w) => { const ww = ctx.measureText(w.t).width; if (w.em && !/^\s+$/.test(w.t)) { ctx.fillStyle = "#fff"; ctx.fillRect(x - 8, y - 70, ww + 16, 86); } ctx.fillStyle = w.em ? "#0F4FD8" : "#fff"; ctx.fillText(w.t, x, y); x += ww; }); y += 92; });
   if (s.sub) y += txt(ctx, s.sub, { x: 90, y: y + 8, w: W - 200, font: "400 26px JB", lh: 38, color: "rgba(255,255,255,.9)" });
-  const top = Math.max(y + 40, 600), ww = W - 420, hh = Math.min(440, H - 270 - top);
-  const calls = bpWire(ctx, s.tela, 130, top, ww, hh, s.seed || 1);
-  bpDim(ctx, 130, top + hh + 34, 130 + ww, top + hh + 34, s.tela === "site" ? "1440 px · celular e computador" : "sob medida para a sua rotina");
-  // do projeto ao produto: o celular pronto na frente da planta
-  ctx.font = "400 20px JB"; ctx.fillStyle = "#fff"; ctx.fillText("PROJETO", 130, top - 16); ctx.fillText("→ PRODUTO", W - 300, top - 16);
-  phoneDev(ctx, W - 235, top + hh / 2 + 10, Math.min(560, hh + 130), s.tela === "site" ? phoneSiteUI : TELAS[s.tela] || TELAS.financeiro, s.seed || 1, 0.14);
-  calls.forEach(([cx, cy, label], k) => {
-    const L = "ABC"[k]; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy, 17, 0, 7); ctx.fill();
-    ctx.font = "700 20px JB"; ctx.fillStyle = "#0F4FD8"; ctx.textAlign = "center"; ctx.fillText(L, cx, cy + 7); ctx.textAlign = "left";
-    ctx.font = "400 20px JB"; ctx.fillStyle = "#fff"; ctx.fillText(label, 90, H - 170 + k * 36);
-  });
+  const top = Math.max(y + 50, 560), box = { x: 100, y: top + 30, w: W - 200, h: H - 250 - top };
+  // cotas da "planta" em volta da figura
+  ctx.save(); ctx.setLineDash([10, 10]); ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.lineWidth = 2; ctx.strokeRect(box.x - 10, box.y - 10, box.w + 20, box.h + 20); ctx.restore();
+  bpDim(ctx, box.x - 10, box.y - 34, box.x + box.w + 10, box.y - 34, s.tela === "site" ? "celular e computador" : "sob medida para a sua rotina");
+  cena(ctx, s.fig || cenaPadrao({ tela: s.tela }), box, "blue", { tela: s.tela, seed: s.seed || 1, lado: (s.seed || 1) % 2 ? "esq" : "dir", telaExtra: s.telaExtra, ...(s.cena || {}) });
 };
 
 /* ---------- dica: branco com grade azul e onda azul ---------- */
@@ -283,15 +279,11 @@ SL.dica = (ctx, s) => {
   lightBg(ctx);
   ctx.font = "36px AN"; ctx.fillStyle = INK; ctx.fillText(BANK.insta || "@armetec.br", MX, 140); wordmark(ctx, W - MX, 146, { size: 36, color: INK, align: "right" });
   ctx.fillStyle = ON_BLUE; rr(ctx, MX, 196, 150, 52, 26); ctx.fill(); ctx.font = "700 24px MS"; ctx.fillStyle = "#fff"; ctx.letterSpacing = "4px"; ctx.fillText("DICA", MX + 30, 231); ctx.letterSpacing = "0px";
-  let y = 352; y += txt(ctx, s.h, { x: MX, y, w: MWX, font: "700 86px MS", lh: 80, color: INK, em: ON_BLUE });
-  if (s.sub) y += txt(ctx, s.sub, { x: MX, y: y - 80 + 60, w: 800, font: "400 31px MS", lh: 38, color: "rgba(11,18,32,.72)" }) - 80 + 60;
-  // figura: brilho azul, celular claro inclinado e notificações flutuando
-  const top = Math.max(y + 10, 600), cx = W - 300, cy = top + 400;
-  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 520); g.addColorStop(0, "rgba(22,104,255,.28)"); g.addColorStop(1, "rgba(22,104,255,0)"); ctx.fillStyle = g; ctx.fillRect(0, top - 100, W, H);
-  ctx.globalAlpha = 0.08; icon(ctx, cx - 330, cy - 330, 660, ON_BLUE); ctx.globalAlpha = 1;
-  phoneDev(ctx, cx, cy, 780, phoneLightUI, 0, 0.14);
-  floatCard(ctx, MX - 10, top + 110, 450, "check", "Tarefa concluída", "agora mesmo", GREEN, -0.04);
-  floatCard(ctx, MX + 30, top + 300, 450, "agenda", "Lembrete enviado", "cliente confirmou", ON_BLUE, 0.03);
+  const size = strip(s.h).length <= 26 ? 124 : strip(s.h).length <= 40 ? 108 : 92, lh = size * 0.9;
+  let y = 250 + size; y += txt(ctx, s.h, { x: MX, y, w: MWX, font: `800 ${size}px MS`, lh, color: INK, em: ON_BLUE });
+  if (s.sub) y += txt(ctx, s.sub, { x: MX, y: y - lh + 62, w: 820, font: "500 32px MS", lh: 40, color: "rgba(11,18,32,.72)" }) - lh + 62;
+  const top = Math.max(y + 20, 560);
+  cena(ctx, s.fig || "lista", { x: MX - 30, y: top, w: MWX + 60, h: H - 130 - top }, "light", { seed: s.seed || 1, lado: (s.seed || 1) % 2 ? "esq" : "dir", ...(s.cena || {}) });
   ctx.font = "600 28px MS"; ctx.fillStyle = INK; ctx.fillText(BANK.site || "armetec.com.br", MX, H - 72);
 };
 
@@ -337,16 +329,16 @@ buildPost = function (p, gi) { // eslint-disable-line no-global-assign
   const slides = [], card = ([t, x, ic], k, fb) => ({ n: String(k + 1).padStart(2, "0"), t, p: x, ic: ic || iconFor(t, fb) });
   if (p.f === "institucional") {
     slides.push({ type: "kCapa", pre: p.pre, h: p.h, sub: p.sub });
-    p.itens.forEach((it, k) => slides.push({ type: "kItem", ...card(it, k, "check"), seed: gi * 7 + k }));
+    p.itens.forEach((it, k) => slides.push({ type: "kItem", ...card(it, k, "check"), fig: it[3], seed: gi * 7 + k }));
   } else if (p.f === "dor") {
     slides.push({ type: "kDorCapa", k: p.k, h: p.h, sub: p.sub, caos: p.caos });
     slides.push({ type: "kProblemas", itens: p.itens.map((it, k) => card(it, k)) });
     slides.push({ type: "kSolucao", h: p.sol.h, itens: p.sol.itens });
     if (p.case) slides.push({ type: "kCase", t: p.case.t, p: p.case.p, tela: p.case.tela });
   } else if (p.f === "mockup") {
-    slides.push({ type: "bpServico", k: p.k, h: p.h, sub: p.sub, tela: p.tela, seed: gi + 1 });
+    slides.push({ type: "bpServico", k: p.k, h: p.h, sub: p.sub, tela: p.tela, fig: p.fig, cena: p.cena, telaExtra: p.telaExtra, seed: gi + 1 });
   } else {
-    slides.push({ type: "dica", h: p.h, sub: p.sub });
+    slides.push({ type: "dica", h: p.h, sub: p.sub, fig: p.fig, cena: p.cena, seed: gi + 1 });
   }
   if (slides.length > 1) { const c = p.cta || CTAS[gi % CTAS.length]; slides.push({ type: "kCta", h: c[0], p: c[1] }); }
   const hook = strip((p.pre ? p.pre + " " : "") + p.h), body = p.leg || strip(p.sub || "");

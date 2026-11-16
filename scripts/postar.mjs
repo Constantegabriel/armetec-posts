@@ -38,7 +38,7 @@ async function api(route, body) {
 // Servidor local só com os arquivos do app e uma página vazia para desenhar.
 const TYPES = { ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".woff2": "font/woff2", ".otf": "font/otf", ".ttf": "font/ttf", ".webp": "image/webp" };
 const PAGE = `<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/style.css"></head><body>
-<script src="/slides.js"></script><script src="/estilos.js"></script></body></html>`;
+<script src="/slides.js"></script><script src="/estilos.js"></script><script src="/cenas.js"></script></body></html>`;
 function serve() {
   const srv = http.createServer((req, res) => {
     const u = decodeURIComponent(new URL(req.url, "http://x").pathname);
