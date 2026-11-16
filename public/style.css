@@ -243,3 +243,7 @@ main.shell{padding-bottom:40px}
 .day.past{opacity:.55}
 .wk-nav:disabled{opacity:.25;cursor:default}
 #offDay{background:var(--surface);border-color:var(--line)}
+.ig-manual{display:flex;flex-direction:column;gap:8px;margin:4px 0 12px;padding:14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--gold)}
+.ig-manual span{color:var(--muted);font-size:13.5px}
+.ig-manual input{font:inherit;font-size:16px;color:var(--fg);background:var(--bg);border:1px solid var(--line-2);border-radius:12px;padding:12px 14px}
+.ig-manual button{align-self:flex-start}

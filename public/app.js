@@ -287,7 +287,22 @@ async function refreshSocialUI() {
       refreshSocialUI();
     };
   }
+  $("#igManual").hidden = !(st.igPending && !(st.instagram && st.instagram.connected));
 }
+$("#igManual").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const id = $("#igId").value.replace(/\D/g, ""), btn = $("#igManual button");
+  if (!id) return toast("Cole o ID da conta (só números).");
+  btn.disabled = true; btn.textContent = "Conferindo…";
+  try {
+    const r = await fetch("/api/social", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ igManual: { id } }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "Não deu certo.");
+    toast("Instagram conectado ✓ " + (j.instagram && j.instagram.username ? "@" + j.instagram.username : ""));
+    $("#igId").value = ""; refreshSocialUI();
+  } catch (x) { toast(x.message); }
+  btn.disabled = false; btn.textContent = "Concluir";
+});
 // Volta da tela de autorização do Instagram/TikTok.
 (() => {
   const q = new URLSearchParams(location.search), net = q.get("rede");
