@@ -13,25 +13,6 @@ FONTS.push("800 40px MS", "600 40px MS", "400 40px MS", "900 40px AR", "400 40px
 
 /* ---------- peças comuns ---------- */
 // Onda (fita branca) contínua: a posição vem do x "global" do carrossel, então ela passa de um slide para o outro.
-// waves: altura (b) e amplitude (a) da onda em cada slide; entre um slide e outro ela muda suavemente, sem emenda.
-function ribbon(ctx, i, total, { color = SOFT, waves = null, alpha = 1 } = {}) {
-  const off = (i - 1) * W, end = total * W - W * 0.45, wv = waves || Array.from({ length: total }, () => ({ b: 930, a: 1 }));
-  const lerp = (key, g) => { const pos = Math.max(0, Math.min(wv.length - 1, g / W - 0.5)), k = Math.min(wv.length - 2, Math.floor(pos)); if (wv.length < 2) return wv[0][key]; const t = pos - k, sm = (1 - Math.cos(Math.PI * t)) / 2; return wv[k][key] * (1 - sm) + wv[k + 1][key] * sm; };
-  const base = (g) => lerp("b", g), amp = (g) => lerp("a", g);
-  const strands = [
-    { y: (g) => base(g) + amp(g) * (120 * Math.sin(g / 520 + 0.6) + 34 * Math.sin(g / 190)), t: (g) => 30 + 16 * Math.sin(g / 330 + 1) },
-    { y: (g) => base(g) + amp(g) * (70 + 110 * Math.sin(g / 470 + 1.4) + 24 * Math.sin(g / 230 + 2)), t: (g) => 18 + 12 * Math.sin(g / 280) },
-  ];
-  ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color;
-  for (const st of strands) {
-    const thick = (g) => Math.max(0, Math.min(1, (end - g) / 380)) * st.t(g);
-    ctx.beginPath();
-    for (let x = -10; x <= W + 10; x += 6) { const g = off + x; ctx.lineTo(x, st.y(g) - thick(g) / 2); }
-    for (let x = W + 10; x >= -10; x -= 6) { const g = off + x; ctx.lineTo(x, st.y(g) + thick(g) / 2); }
-    ctx.closePath(); ctx.fill();
-  }
-  ctx.restore();
-}
 function counter(ctx, i, total, { dark = true } = {}) {
   ctx.font = "38px AN"; const a = String(i).padStart(2, "0"); ctx.fillStyle = ON_BLUE; ctx.fillText(a, MX, H - 72);
   ctx.fillStyle = dark ? "#fff" : INK; ctx.fillText("/" + String(total).padStart(2, "0"), MX + ctx.measureText(a).width, H - 72);
@@ -50,8 +31,10 @@ function titleBlock(ctx, h, sub, { y = 270, size = 118, color = "#fff", em = ON_
   if (sub) yy += txt(ctx, sub, { x: MX, y: yy - size * 0.86 + 70, w: Math.min(w, 800), font: "400 31px MS", lh: 33, color: subColor });
   return yy - size * 0.86 + 70;
 }
-function darkBg(ctx) {
-  if (bgDark) ctx.drawImage(bgDark, 0, 0, W, H);
+// Slides ímpares: fundo normal; pares: espelhado. Assim a borda de um slide encontra a borda igual do próximo.
+function darkBg(ctx, i = 1) {
+  if (bgDark && i % 2 === 0) { ctx.save(); ctx.translate(W, 0); ctx.scale(-1, 1); ctx.drawImage(bgDark, 0, 0, W, H); ctx.restore(); }
+  else if (bgDark) ctx.drawImage(bgDark, 0, 0, W, H);
   else { ctx.fillStyle = "#050B1F"; ctx.fillRect(0, 0, W, H); }
 }
 
@@ -119,7 +102,7 @@ function phoneDev(ctx, cx, cy, h, t, seed, rot = -0.32) {
   const w = h * 0.48; ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.transform(1, 0, 0.12, 1, 0, 0);
   ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 50; ctx.shadowOffsetY = 30; ctx.fillStyle = metal(ctx, -w / 2, -h / 2, w, h); rr(ctx, -w / 2, -h / 2, w, h, w * 0.17); ctx.fill(); ctx.shadowColor = "transparent";
   ctx.fillStyle = "#0A0A0C"; rr(ctx, -w / 2 + 8, -h / 2 + 8, w - 16, h - 16, w * 0.15); ctx.fill();
-  const bz = w * 0.05; ctx.save(); rr(ctx, -w / 2 + bz, -h / 2 + bz, w - 2 * bz, h - 2 * bz, w * 0.13); ctx.clip(); ctx.translate(-w / 2 + bz, -h / 2 + bz); ctx.scale((w - 2 * bz) / 380, (h - 2 * bz) / 800); phoneUI(ctx, t, seed); ctx.restore();
+  const bz = w * 0.05; ctx.save(); rr(ctx, -w / 2 + bz, -h / 2 + bz, w - 2 * bz, h - 2 * bz, w * 0.13); ctx.clip(); ctx.translate(-w / 2 + bz, -h / 2 + bz); ctx.scale((w - 2 * bz) / 380, (h - 2 * bz) / 800); typeof t === "function" ? t(ctx) : phoneUI(ctx, t, seed); ctx.restore();
   ctx.fillStyle = "#000"; rr(ctx, -w * 0.16, -h / 2 + bz + 12, w * 0.32, w * 0.09, w * 0.045); ctx.fill();
   ctx.restore();
 }
@@ -159,16 +142,16 @@ function deviceFor(ctx, ic, top, seed, tela) {
 
 /* ---------- slides dos carrosséis (escuro) ---------- */
 SL.kCapa = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves }); logo3d(ctx, W / 2, 960, 640, { glow: false, rot: -0.22 });
+  darkBg(ctx, i); logo3d(ctx, W / 2, 960, 640, { glow: false, rot: -0.22 });
   headDark(ctx, i, total); titleBlock(ctx, (s.pre ? s.pre + "\n" : "") + s.h, s.sub); counter(ctx, i, total);
 };
 SL.kItem = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves }); headDark(ctx, i, total);
+  darkBg(ctx, i); headDark(ctx, i, total);
   const end = titleBlock(ctx, s.t, s.p, { size: s.t.length > 34 ? 96 : 110 });
   deviceFor(ctx, s.ic, Math.max(600, end + 40), s.seed || i, s.tela); counter(ctx, i, total);
 };
 SL.kDorCapa = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves }); headDark(ctx, i, total);
+  darkBg(ctx, i); headDark(ctx, i, total);
   const end = titleBlock(ctx, s.h, s.sub, { size: 104 });
   // celular com a conversa caótica
   const top = Math.max(620, end + 40), h = H - top + 260, w = h * 0.48, cx = W / 2 + 60, cy = top + h / 2 - 40;
@@ -188,7 +171,7 @@ SL.kDorCapa = (ctx, s, i, total) => {
   counter(ctx, i, total);
 };
 SL.kProblemas = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves, alpha: 0.9 }); headDark(ctx, i, total);
+  darkBg(ctx, i); headDark(ctx, i, total);
   let y = 270; y += txt(ctx, "Isso acontece <em>aí?</em>", { x: MX, y, w: MWX, font: "700 104px MS", lh: 90, color: "#fff", em: ON_BLUE });
   const io = { w: MWX - 170, font: "700 40px MS", lh: 46 }, po = { w: MWX - 170, font: "400 28px MS", lh: 34 };
   const hs = s.itens.map((it) => hgt(ctx, it.t, io) + 14 + hgt(ctx, it.p, po) + 70), gap = 26, tot = hs.reduce((a, b) => a + b + gap, 0);
@@ -203,7 +186,7 @@ SL.kProblemas = (ctx, s, i, total) => {
   counter(ctx, i, total);
 };
 SL.kSolucao = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves }); headDark(ctx, i, total);
+  darkBg(ctx, i); headDark(ctx, i, total);
   let y = 270; y += txt(ctx, s.h, { x: MX, y, w: MWX, font: "700 100px MS", lh: 88, color: "#fff", em: ON_BLUE });
   y += 10;
   const io = { w: MWX - 110, font: "600 36px MS", lh: 42 };
@@ -215,12 +198,12 @@ SL.kSolucao = (ctx, s, i, total) => {
   counter(ctx, i, total);
 };
 SL.kCase = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves }); headDark(ctx, i, total);
+  darkBg(ctx, i); headDark(ctx, i, total);
   const end = titleBlock(ctx, s.t, s.p, { size: 96 });
   tabletDev(ctx, (W - 720) / 2, Math.max(640, end + 60), 720, TELAS[s.tela] || TELAS.barbearia, 5); counter(ctx, i, total);
 };
 SL.kCta = (ctx, s, i, total) => {
-  darkBg(ctx); ribbon(ctx, i, total, { waves: s.waves });
+  darkBg(ctx, i);
   ctx.font = "36px AN"; ctx.fillStyle = "#fff"; ctx.fillText(BANK.insta || "@armetec.br", MX, 140); wordmark(ctx, W - MX, 146, { size: 36, color: "#fff", align: "right", tec: BLUE_2 });
   logo3d(ctx, W / 2, 470, 400, { glow: false, rot: 0.15 });
   let y = 830; y += txt(ctx, s.h, { x: MX, y, w: MWX, font: "700 92px MS", lh: 84, color: "#fff", em: ON_BLUE, align: "center" });
@@ -275,9 +258,12 @@ SL.bpServico = (ctx, s) => {
   const lines = [[]]; let lw = 0; for (const w of words) { const ww = ctx.measureText(w.t).width; if (/^\s+$/.test(w.t)) { if (lines.at(-1).length) { lines.at(-1).push(w); lw += ww; } continue; } if (lw + ww > W - 180 && lines.at(-1).length) { lines.push([]); lw = 0; } lines.at(-1).push(w); lw += ww; }
   let y = 230; lines.forEach((ln) => { while (ln.length && /^\s+$/.test(ln.at(-1).t)) ln.pop(); let x = 90; ln.forEach((w) => { const ww = ctx.measureText(w.t).width; if (w.em && !/^\s+$/.test(w.t)) { ctx.fillStyle = "#fff"; ctx.fillRect(x - 8, y - 70, ww + 16, 86); } ctx.fillStyle = w.em ? "#0F4FD8" : "#fff"; ctx.fillText(w.t, x, y); x += ww; }); y += 92; });
   if (s.sub) y += txt(ctx, s.sub, { x: 90, y: y + 8, w: W - 200, font: "400 26px JB", lh: 38, color: "rgba(255,255,255,.9)" });
-  const top = Math.max(y + 40, 600), ww = W - 260, hh = Math.min(440, H - 270 - top);
+  const top = Math.max(y + 40, 600), ww = W - 420, hh = Math.min(440, H - 270 - top);
   const calls = bpWire(ctx, s.tela, 130, top, ww, hh, s.seed || 1);
   bpDim(ctx, 130, top + hh + 34, 130 + ww, top + hh + 34, s.tela === "site" ? "1440 px · celular e computador" : "sob medida para a sua rotina");
+  // do projeto ao produto: o celular pronto na frente da planta
+  ctx.font = "400 20px JB"; ctx.fillStyle = "#fff"; ctx.fillText("PROJETO", 130, top - 16); ctx.fillText("→ PRODUTO", W - 300, top - 16);
+  phoneDev(ctx, W - 235, top + hh / 2 + 10, Math.min(560, hh + 130), s.tela === "site" ? phoneSiteUI : TELAS[s.tela] || TELAS.financeiro, s.seed || 1, 0.14);
   calls.forEach(([cx, cy, label], k) => {
     const L = "ABC"[k]; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy, 17, 0, 7); ctx.fill();
     ctx.font = "700 20px JB"; ctx.fillStyle = "#0F4FD8"; ctx.textAlign = "center"; ctx.fillText(L, cx, cy + 7); ctx.textAlign = "left";
@@ -294,14 +280,57 @@ function lightBg(ctx) {
   for (let x = 47; x <= W; x += 110) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); } for (let y = 79; y <= H; y += 101) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
 }
 SL.dica = (ctx, s) => {
-  lightBg(ctx); ribbon(ctx, 1, 2, { color: ON_BLUE, waves: [{ b: 1010, a: 0.7 }, { b: 1010, a: 0.7 }], alpha: 0.95 });
+  lightBg(ctx);
   ctx.font = "36px AN"; ctx.fillStyle = INK; ctx.fillText(BANK.insta || "@armetec.br", MX, 140); wordmark(ctx, W - MX, 146, { size: 36, color: INK, align: "right" });
-  ctx.globalAlpha = 0.06; icon(ctx, W - 520, 260, 560, ON_BLUE); ctx.globalAlpha = 1;
-  ctx.fillStyle = ON_BLUE; rr(ctx, MX, 210, 150, 52, 26); ctx.fill(); ctx.font = "700 24px MS"; ctx.fillStyle = "#fff"; ctx.letterSpacing = "4px"; ctx.fillText("DICA", MX + 30, 245); ctx.letterSpacing = "0px";
-  let y = 390; y += txt(ctx, s.h, { x: MX, y, w: MWX, font: "700 96px MS", lh: 88, color: INK, em: ON_BLUE });
-  if (s.sub) txt(ctx, s.sub, { x: MX, y: y - 88 + 70, w: 820, font: "400 34px MS", lh: 42, color: "rgba(11,18,32,.72)" });
+  ctx.fillStyle = ON_BLUE; rr(ctx, MX, 196, 150, 52, 26); ctx.fill(); ctx.font = "700 24px MS"; ctx.fillStyle = "#fff"; ctx.letterSpacing = "4px"; ctx.fillText("DICA", MX + 30, 231); ctx.letterSpacing = "0px";
+  let y = 352; y += txt(ctx, s.h, { x: MX, y, w: MWX, font: "700 86px MS", lh: 80, color: INK, em: ON_BLUE });
+  if (s.sub) y += txt(ctx, s.sub, { x: MX, y: y - 80 + 60, w: 800, font: "400 31px MS", lh: 38, color: "rgba(11,18,32,.72)" }) - 80 + 60;
+  // figura: brilho azul, celular claro inclinado e notificações flutuando
+  const top = Math.max(y + 10, 600), cx = W - 300, cy = top + 400;
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 520); g.addColorStop(0, "rgba(22,104,255,.28)"); g.addColorStop(1, "rgba(22,104,255,0)"); ctx.fillStyle = g; ctx.fillRect(0, top - 100, W, H);
+  ctx.globalAlpha = 0.08; icon(ctx, cx - 330, cy - 330, 660, ON_BLUE); ctx.globalAlpha = 1;
+  phoneDev(ctx, cx, cy, 780, phoneLightUI, 0, 0.14);
+  floatCard(ctx, MX - 10, top + 110, 450, "check", "Tarefa concluída", "agora mesmo", GREEN, -0.04);
+  floatCard(ctx, MX + 30, top + 300, 450, "agenda", "Lembrete enviado", "cliente confirmou", ON_BLUE, 0.03);
   ctx.font = "600 28px MS"; ctx.fillStyle = INK; ctx.fillText(BANK.site || "armetec.com.br", MX, H - 72);
 };
+
+/* ---------- figuras dos posts de foto única ---------- */
+// Celular com tela clara (dica): saudação, tarefas do dia com check e um anel de progresso.
+function phoneLightUI(ctx) {
+  ctx.fillStyle = "#F5F7FC"; ctx.fillRect(0, 0, 380, 800);
+  ctx.fillStyle = ON_BLUE; ctx.fillRect(0, 0, 380, 190); brandSmall(ctx, 30, 120, 30);
+  ctx.font = "700 26px AI"; ctx.fillStyle = "#fff"; ctx.fillText("Bom dia!", 30, 168);
+  ctx.fillStyle = "#fff"; rr(ctx, 22, 214, 336, 150, 18); ctx.fill();
+  ctx.lineWidth = 14; ctx.strokeStyle = "#E3EAF8"; ctx.beginPath(); ctx.arc(96, 289, 46, 0, 7); ctx.stroke(); ctx.strokeStyle = ON_BLUE; ctx.beginPath(); ctx.arc(96, 289, 46, -1.57, 3.6); ctx.stroke();
+  ctx.font = "800 22px AI"; ctx.fillStyle = INK; ctx.textAlign = "center"; ctx.fillText("82%", 96, 297); ctx.textAlign = "left";
+  ctx.font = "700 20px AI"; ctx.fillText("Rotina em dia", 168, 276); ctx.font = "400 16px AI"; ctx.fillStyle = "#6B7690"; ctx.fillText("9 de 11 tarefas", 168, 302);
+  ctx.font = "700 20px AI"; ctx.fillStyle = INK; ctx.fillText("Hoje", 26, 410);
+  [["Confirmar agenda", 1], ["Enviar orçamento", 1], ["Revisar pedidos", 0], ["Fechar o caixa", 0]].forEach(([t, ok], k) => {
+    const y = 432 + k * 86; ctx.fillStyle = "#fff"; rr(ctx, 22, y, 336, 72, 14); ctx.fill();
+    ctx.fillStyle = ok ? ON_BLUE : "#fff"; ctx.strokeStyle = ok ? ON_BLUE : "#C5CEDD"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(58, y + 36, 15, 0, 7); ctx.fill(); ctx.stroke();
+    if (ok) { ctx.strokeStyle = "#fff"; ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(51, y + 36); ctx.lineTo(56, y + 42); ctx.lineTo(66, y + 30); ctx.stroke(); }
+    ctx.font = "600 18px AI"; ctx.fillStyle = ok ? "#8A94AA" : INK; ctx.fillText(t, 88, y + 43);
+  });
+}
+// Celular com um site aberto (serviço de sites).
+function phoneSiteUI(ctx) {
+  const g = ctx.createLinearGradient(0, 0, 0, 800); g.addColorStop(0, "#070C1C"); g.addColorStop(1, "#0C1631"); ctx.fillStyle = g; ctx.fillRect(0, 0, 380, 800);
+  brandSmall(ctx, 26, 112, 24); ctx.fillStyle = "#fff"; [0, 1, 2].forEach((k) => ctx.fillRect(320, 94 + k * 9, 32, 3));
+  txt(ctx, "Seu negócio <em>em destaque</em> na internet", { x: 26, y: 210, w: 320, font: "700 36px AI", lh: 44, color: "#fff", em: "#7FB0FF" });
+  ctx.font = "400 16px AI"; ctx.fillStyle = "#AEB8D2"; ctx.fillText("Rápido, bonito e feito para vender.", 26, 380);
+  ctx.fillStyle = ON_BLUE; rr(ctx, 26, 410, 328, 56, 28); ctx.fill(); ctx.font = "700 17px AI"; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText("Falar no WhatsApp", 190, 444); ctx.textAlign = "left";
+  const gg = ctx.createLinearGradient(26, 490, 354, 770); gg.addColorStop(0, "#DCE6F7"); gg.addColorStop(0.5, "#8FA8D6"); gg.addColorStop(1, "#1B3A7A"); ctx.fillStyle = gg; rr(ctx, 26, 490, 328, 280, 18); ctx.fill();
+  ctx.fillStyle = "rgba(10,20,50,.5)"; for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) ctx.fillRect(70 + c * 66 + r * 8, 560 + r * 66, 44, 46);
+}
+// Cartão flutuante (notificação) com sombra.
+function floatCard(ctx, x, y, w, ic, title, sub, color = ON_BLUE, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  ctx.shadowColor = "rgba(15,40,100,.22)"; ctx.shadowBlur = 40; ctx.shadowOffsetY = 18; ctx.fillStyle = "#fff"; rr(ctx, 0, 0, w, 116, 26); ctx.fill(); ctx.shadowColor = "transparent";
+  ctx.fillStyle = color; ctx.beginPath(); ctx.arc(60, 58, 34, 0, 7); ctx.fill(); lineIcon(ctx, ic, 43, 41, 34, "#fff", 2.4);
+  ctx.font = "700 27px MS"; ctx.fillStyle = INK; ctx.fillText(title, 112, 52); ctx.font = "400 22px MS"; ctx.fillStyle = "#6B7690"; ctx.fillText(sub, 112, 84);
+  ctx.restore();
+}
 
 /* ---------- montagem: cada formato ganha o seu fundo ---------- */
 buildPost = function (p, gi) { // eslint-disable-line no-global-assign
@@ -320,8 +349,6 @@ buildPost = function (p, gi) { // eslint-disable-line no-global-assign
     slides.push({ type: "dica", h: p.h, sub: p.sub });
   }
   if (slides.length > 1) { const c = p.cta || CTAS[gi % CTAS.length]; slides.push({ type: "kCta", h: c[0], p: c[1] }); }
-  const WAVE = { kSolucao: { b: 1165, a: 0.3 }, kCta: { b: 470, a: 0.55 } }, waves = slides.map((sl) => WAVE[sl.type] || { b: 930, a: 1 });
-  slides.forEach((sl) => (sl.waves = waves));
   const hook = strip((p.pre ? p.pre + " " : "") + p.h), body = p.leg || strip(p.sub || "");
   const caption = hook + "\n\n" + (body ? body + "\n\n" : "") + FECHO[gi % FECHO.length] + "\n\n" + TAGS[gi % TAGS.length];
   return { slides, caption, hook, k: p.k || p.f, f: p.f };
