@@ -98,30 +98,45 @@ function phoneUI(ctx, t, seed) { // 380x800
   ctx.font = "700 22px AI"; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText("32", 278, 688); ctx.textAlign = "left";
 }
 function metal(ctx, x, y, w, h) { const g = ctx.createLinearGradient(x, y, x + w, y + h); g.addColorStop(0, "#5E636D"); g.addColorStop(0.3, "#D9DCE2"); g.addColorStop(0.6, "#7C818C"); g.addColorStop(1, "#C4C8CF"); return g; }
+function titanium(ctx, x, y, w, h) { const g = ctx.createLinearGradient(x, y, x + w, y); g.addColorStop(0, "#6F6B66"); g.addColorStop(0.08, "#D9D5CE"); g.addColorStop(0.18, "#8E8A84"); g.addColorStop(0.82, "#8E8A84"); g.addColorStop(0.92, "#E2DED7"); g.addColorStop(1, "#6F6B66"); return g; }
+function glare(ctx, x, y, w, h) { const g = ctx.createLinearGradient(x, y, x + w, y + h); g.addColorStop(0, "rgba(255,255,255,.10)"); g.addColorStop(0.45, "rgba(255,255,255,0)"); ctx.fillStyle = g; ctx.fillRect(x, y, w, h); }
+// iPhone (Pro): moldura de titânio, botões laterais, ilha dinâmica. t = dados da tela (TELAS) ou uma função que desenha a tela em 380x800.
 function phoneDev(ctx, cx, cy, h, t, seed, rot = -0.32) {
-  const w = h * 0.48; ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.transform(1, 0, 0.12, 1, 0, 0);
-  ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 50; ctx.shadowOffsetY = 30; ctx.fillStyle = metal(ctx, -w / 2, -h / 2, w, h); rr(ctx, -w / 2, -h / 2, w, h, w * 0.17); ctx.fill(); ctx.shadowColor = "transparent";
-  ctx.fillStyle = "#0A0A0C"; rr(ctx, -w / 2 + 8, -h / 2 + 8, w - 16, h - 16, w * 0.15); ctx.fill();
-  const bz = w * 0.05; ctx.save(); rr(ctx, -w / 2 + bz, -h / 2 + bz, w - 2 * bz, h - 2 * bz, w * 0.13); ctx.clip(); ctx.translate(-w / 2 + bz, -h / 2 + bz); ctx.scale((w - 2 * bz) / 380, (h - 2 * bz) / 800); typeof t === "function" ? t(ctx) : phoneUI(ctx, t, seed); ctx.restore();
-  ctx.fillStyle = "#000"; rr(ctx, -w * 0.16, -h / 2 + bz + 12, w * 0.32, w * 0.09, w * 0.045); ctx.fill();
+  const w = h * 0.485, r = w * 0.2; ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot);
+  ctx.fillStyle = "#77736D"; // botões
+  rr(ctx, -w / 2 - 5, -h * 0.31, 7, h * 0.05, 3); ctx.fill(); rr(ctx, -w / 2 - 5, -h * 0.22, 7, h * 0.085, 3); ctx.fill(); rr(ctx, -w / 2 - 5, -h * 0.12, 7, h * 0.085, 3); ctx.fill(); rr(ctx, w / 2 - 2, -h * 0.2, 7, h * 0.12, 3); ctx.fill();
+  ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 60; ctx.shadowOffsetY = 34; ctx.fillStyle = titanium(ctx, -w / 2, -h / 2, w, h); rr(ctx, -w / 2, -h / 2, w, h, r); ctx.fill(); ctx.shadowColor = "transparent";
+  ctx.fillStyle = "#050505"; rr(ctx, -w / 2 + w * 0.022, -h / 2 + w * 0.022, w - w * 0.044, h - w * 0.044, r * 0.9); ctx.fill();
+  const bz = w * 0.045, sw = w - 2 * bz, sh = h - 2 * bz;
+  ctx.save(); rr(ctx, -w / 2 + bz, -h / 2 + bz, sw, sh, r * 0.78); ctx.clip(); ctx.translate(-w / 2 + bz, -h / 2 + bz); ctx.save(); ctx.scale(sw / 380, sh / 800); typeof t === "function" ? t(ctx) : phoneUI(ctx, t, seed); ctx.restore(); glare(ctx, 0, 0, sw, sh); ctx.restore();
+  ctx.fillStyle = "#000"; rr(ctx, -w * 0.15, -h / 2 + bz + w * 0.035, w * 0.3, w * 0.085, w * 0.0425); ctx.fill(); // ilha dinâmica
   ctx.restore();
 }
+// iPad (Pro): bordas finas e iguais, cantos arredondados, câmera na borda e uma Apple Pencil ao lado.
 function tabletDev(ctx, x, y, w, t, seed) {
-  const h = w * 0.68; ctx.save(); ctx.translate(x, y); ctx.transform(1, 0.05, -0.04, 1, 0, 0);
-  ctx.fillStyle = "#15171C"; ctx.beginPath(); ctx.moveTo(w * 0.08, h * 0.45); ctx.lineTo(w * 0.2, h * 0.45); ctx.lineTo(w * 0.1, h + 40); ctx.lineTo(-w * 0.02, h + 40); ctx.closePath(); ctx.fill();
-  ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 50; ctx.shadowOffsetY = 26; ctx.fillStyle = metal(ctx, 0, 0, w, h); rr(ctx, 0, 0, w, h, 34); ctx.fill(); ctx.shadowColor = "transparent";
-  ctx.fillStyle = "#0A0A0C"; rr(ctx, 6, 6, w - 12, h - 12, 30); ctx.fill();
-  ctx.save(); rr(ctx, 22, 22, w - 44, h - 44, 16); ctx.clip(); ctx.translate(22, 22); ctx.scale((w - 44) / 1000, (h - 44) / 680); dashDark(ctx, t, seed); ctx.restore();
+  const h = w * 0.7, r = w * 0.045; ctx.save(); ctx.translate(x + w / 2, y + h / 2); ctx.rotate(-0.035); ctx.translate(-w / 2, -h / 2);
+  ctx.shadowColor = "rgba(0,0,0,.5)"; ctx.shadowBlur = 60; ctx.shadowOffsetY = 30; const g = ctx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, "#C9CCD2"); g.addColorStop(1, "#8D9199"); ctx.fillStyle = g; rr(ctx, 0, 0, w, h, r); ctx.fill(); ctx.shadowColor = "transparent";
+  ctx.fillStyle = "#050505"; rr(ctx, 3, 3, w - 6, h - 6, r - 2); ctx.fill();
+  const bz = w * 0.032; ctx.save(); rr(ctx, bz, bz, w - 2 * bz, h - 2 * bz, r * 0.55); ctx.clip(); ctx.translate(bz, bz); ctx.save(); ctx.scale((w - 2 * bz) / 1000, (h - 2 * bz) / 680); dashDark(ctx, t, seed); ctx.restore(); glare(ctx, 0, 0, w - 2 * bz, h - 2 * bz); ctx.restore();
+  ctx.fillStyle = "#1C1E22"; ctx.beginPath(); ctx.arc(w / 2, bz / 2, w * 0.005, 0, 7); ctx.fill();
+  ctx.restore();
+  // Apple Pencil
+  ctx.save(); ctx.translate(x + w * 0.62, y + h + 34); ctx.rotate(-0.06); ctx.shadowColor = "rgba(0,0,0,.35)"; ctx.shadowBlur = 16; ctx.shadowOffsetY = 8;
+  const pl = w * 0.42, pw = w * 0.022; ctx.fillStyle = "#F4F5F7"; rr(ctx, 0, 0, pl, pw, pw / 2); ctx.fill(); ctx.shadowColor = "transparent";
+  ctx.fillStyle = "#D7DADF"; ctx.beginPath(); ctx.moveTo(pl - 2, 0); ctx.lineTo(pl + pw * 1.6, pw / 2); ctx.lineTo(pl - 2, pw); ctx.closePath(); ctx.fill(); ctx.fillStyle = "#3A3D42"; ctx.beginPath(); ctx.arc(pl + pw * 1.45, pw / 2, pw * 0.16, 0, 7); ctx.fill();
   ctx.restore();
 }
+// MacBook: tela com bordas finas e notch, base de alumínio fina com o recorte frontal. extra = textos do site ou uma função que desenha a tela em 1000x620.
 function laptopDev(ctx, x, y, w, extra) {
-  const sh = w * 0.6; ctx.save(); ctx.translate(x, y); ctx.transform(1, -0.03, 0, 1, 0, 0);
-  ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 50; ctx.shadowOffsetY = 20; ctx.fillStyle = "#1A1C22"; rr(ctx, 0, 0, w, sh, 22); ctx.fill(); ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "#5A5E68"; ctx.lineWidth = 3; rr(ctx, 1.5, 1.5, w - 3, sh - 3, 22); ctx.stroke();
-  ctx.save(); rr(ctx, 18, 18, w - 36, sh - 30, 6); ctx.clip(); ctx.translate(18, 18); ctx.scale((w - 36) / 1000, (sh - 30) / 620); siteDark(ctx, extra); ctx.restore();
-  ctx.fillStyle = metal(ctx, -60, sh, w + 120, 40); ctx.beginPath(); ctx.moveTo(-10, sh); ctx.lineTo(w + 10, sh); ctx.lineTo(w + 70, sh + 34); ctx.lineTo(-70, sh + 34); ctx.closePath(); ctx.fill();
-  ctx.fillStyle = "#2A2D34"; ctx.fillRect(w * 0.06, sh + 6, w * 0.88, 10);
-  ctx.fillStyle = "#9EA3AD"; rr(ctx, -70, sh + 34, w + 140, 8, 4); ctx.fill();
+  const sh = w * 0.64; ctx.save(); ctx.translate(x, y);
+  ctx.save(); ctx.shadowColor = "rgba(0,0,0,.5)"; ctx.shadowBlur = 60; ctx.shadowOffsetY = 30; ctx.fillStyle = "#AEB2B9"; rr(ctx, 0, 0, w, sh, w * 0.028); ctx.fill(); ctx.restore();
+  ctx.fillStyle = "#050505"; rr(ctx, 3, 3, w - 6, sh - 6, w * 0.026); ctx.fill();
+  const bz = w * 0.022, top = w * 0.03; ctx.save(); rr(ctx, bz, top, w - 2 * bz, sh - top - bz, 6); ctx.clip(); ctx.translate(bz, top); ctx.save(); ctx.scale((w - 2 * bz) / 1000, (sh - top - bz) / 620); typeof extra === "function" ? extra(ctx) : siteDark(ctx, extra); ctx.restore(); glare(ctx, 0, 0, w - 2 * bz, sh - top - bz); ctx.restore();
+  ctx.fillStyle = "#050505"; rr(ctx, w / 2 - w * 0.055, top - 2, w * 0.11, w * 0.024, [0, 0, 8, 8]); ctx.fill(); // notch
+  ctx.fillStyle = "#2A2C30"; ctx.fillRect(w * 0.02, sh - 4, w * 0.96, 6); // dobradiça
+  const g = ctx.createLinearGradient(0, sh, 0, sh + w * 0.04); g.addColorStop(0, "#E6E8EC"); g.addColorStop(0.6, "#B5B9C0"); g.addColorStop(1, "#8A8E95");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-w * 0.07, sh + 2); ctx.lineTo(w * 1.07, sh + 2); ctx.quadraticCurveTo(w * 1.075, sh + w * 0.035, w * 1.05, sh + w * 0.038); ctx.lineTo(-w * 0.05, sh + w * 0.038); ctx.quadraticCurveTo(-w * 0.075, sh + w * 0.035, -w * 0.07, sh + 2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "#9A9EA5"; rr(ctx, w / 2 - w * 0.08, sh + 2, w * 0.16, w * 0.012, [0, 0, 6, 6]); ctx.fill(); // recorte para abrir
   ctx.restore();
 }
 function iconPanel(ctx, cx, cy, size, ic) {
@@ -152,24 +167,11 @@ SL.kItem = (ctx, s, i, total) => {
   cena(ctx, s.fig || cenaPadrao({ ic: s.ic, tela: s.tela }), { x: MX - 20, y: top, w: MWX + 40, h: H - 170 - top }, "dark", { ic: s.ic, tela: s.tela, seed: s.seed || i, lado: i % 2 ? "esq" : "dir" });
   counter(ctx, i, total);
 };
+// Capa dos carrosséis de problema: cada post tem a sua "bagunça" (campo "capa" no banco: caos, planilha, lento, documento, estoque, lista...).
 SL.kDorCapa = (ctx, s, i, total) => {
   darkBg(ctx, i); headDark(ctx, i, total);
-  const end = titleBlock(ctx, s.h, s.sub, { size: 104 });
-  // celular com a conversa caótica
-  const top = Math.max(620, end + 40), h = H - top + 260, w = h * 0.48, cx = W / 2 + 60, cy = top + h / 2 - 40;
-  ctx.save(); ctx.translate(cx, cy); ctx.rotate(-0.22);
-  ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 50; ctx.shadowOffsetY = 30; ctx.fillStyle = metal(ctx, -w / 2, -h / 2, w, h); rr(ctx, -w / 2, -h / 2, w, h, w * 0.17); ctx.fill(); ctx.shadowColor = "transparent";
-  ctx.fillStyle = "#0A0A0C"; rr(ctx, -w / 2 + 8, -h / 2 + 8, w - 16, h - 16, w * 0.15); ctx.fill();
-  const bz = w * 0.05; rr(ctx, -w / 2 + bz, -h / 2 + bz, w - 2 * bz, h - 2 * bz, w * 0.13); ctx.clip(); ctx.translate(-w / 2 + bz, -h / 2 + bz); ctx.scale((w - 2 * bz) / 380, (h - 2 * bz) / 800);
-  ctx.fillStyle = "#0B1120"; ctx.fillRect(0, 0, 380, 800); ctx.fillStyle = "#111A2F"; ctx.fillRect(0, 0, 380, 140);
-  ctx.fillStyle = "#24345E"; ctx.beginPath(); ctx.arc(52, 100, 24, 0, 7); ctx.fill(); ctx.font = "700 22px AI"; ctx.fillStyle = "#fff"; ctx.fillText("Clientes", 88, 96); ctx.font = "400 15px AI"; ctx.fillStyle = "#8C98B5"; ctx.fillText("digitando…", 88, 118);
-  ctx.fillStyle = RED; ctx.beginPath(); ctx.arc(330, 100, 20, 0, 7); ctx.fill(); ctx.font = "700 17px AI"; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText("47", 330, 106); ctx.textAlign = "left";
-  const caos = s.caos || ["planilha_final_v3.xlsx", "Caderno de anotações", "WhatsApp · 47 mensagens"];
-  [[caos[0], 0], ["Oi, tem horário amanhã?", 1], [caos[1], 0], ["Mandou o orçamento?", 1], [caos[2], 0], ["???", 1], ["Alguém viu meu pedido?", 1], ["Preciso disso hoje!", 0]].forEach(([m, mine], k) => {
-    ctx.font = "500 19px AI"; const bw = Math.min(ctx.measureText(m).width + 36, 300), bx = mine ? 356 - bw : 24, y = 168 + k * 74;
-    ctx.fillStyle = mine ? ON_BLUE : "#1A2440"; rr(ctx, bx, y, bw, 52, 16); ctx.fill(); ctx.fillStyle = "#fff"; ctx.fillText(m.length > 26 ? m.slice(0, 25) + "…" : m, bx + 18, y + 33);
-  });
-  ctx.restore();
+  const end = titleBlock(ctx, s.h, s.sub, { size: 104 }), top = Math.max(600, end + 40);
+  cena(ctx, s.capa || "caos", { x: MX - 20, y: top, w: MWX + 40, h: H - 170 - top }, "dark", { caos: s.caos, seed: s.seed || 1, lado: "esq", ...(s.cena || {}) });
   counter(ctx, i, total);
 };
 SL.kProblemas = (ctx, s, i, total) => {
@@ -224,7 +226,8 @@ function bpBg(ctx, tag) {
   ctx.strokeStyle = "#fff"; ctx.lineWidth = 3; ctx.strokeRect(40, 40, W - 80, H - 80);
   const bx = W - 40 - 520, by = H - 40 - 130; ctx.lineWidth = 2; ctx.strokeRect(bx, by, 520, 130); ctx.beginPath(); ctx.moveTo(bx, by + 65); ctx.lineTo(bx + 520, by + 65); ctx.moveTo(bx + 300, by); ctx.lineTo(bx + 300, by + 130); ctx.stroke();
   ctx.font = "400 18px JB"; ctx.fillStyle = "rgba(255,255,255,.7)"; ctx.fillText("PROJETO", bx + 16, by + 24); ctx.fillText("SERVIÇO", bx + 316, by + 24); ctx.fillText("CONTATO", bx + 16, by + 89); ctx.fillText("SITE", bx + 316, by + 89);
-  ctx.font = "700 24px JB"; ctx.fillStyle = "#fff"; ctx.fillText("ARMETEC", bx + 16, by + 54); ctx.font = "700 20px JB"; ctx.fillText(tag.slice(0, 16).toUpperCase(), bx + 316, by + 54); ctx.font = "700 24px JB"; ctx.fillText(BANK.insta || "@armetec.br", bx + 16, by + 119); ctx.font = "700 20px JB"; ctx.fillText(BANK.site || "armetec.com.br", bx + 316, by + 119);
+  const fit = (t, x, y, maxW, size) => { let f = size; do { ctx.font = `700 ${f}px JB`; } while (ctx.measureText(t).width > maxW && --f > 13); ctx.fillText(t, x, y); };
+  ctx.font = "700 24px JB"; ctx.fillStyle = "#fff"; ctx.fillText("ARMETEC", bx + 16, by + 54); fit(tag.toUpperCase(), bx + 316, by + 54, 190, 24); ctx.font = "700 24px JB"; ctx.fillText(BANK.insta || "@armetec.br", bx + 16, by + 119); fit(BANK.site || "armetec.com.br", bx + 316, by + 119, 190, 22);
 }
 function bpDim(ctx, x1, y1, x2, y2, label) {
   ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
@@ -331,7 +334,7 @@ buildPost = function (p, gi) { // eslint-disable-line no-global-assign
     slides.push({ type: "kCapa", pre: p.pre, h: p.h, sub: p.sub });
     p.itens.forEach((it, k) => slides.push({ type: "kItem", ...card(it, k, "check"), fig: it[3], seed: gi * 7 + k }));
   } else if (p.f === "dor") {
-    slides.push({ type: "kDorCapa", k: p.k, h: p.h, sub: p.sub, caos: p.caos });
+    slides.push({ type: "kDorCapa", k: p.k, h: p.h, sub: p.sub, caos: p.caos, capa: p.capa, cena: p.capaCena, seed: gi });
     slides.push({ type: "kProblemas", itens: p.itens.map((it, k) => card(it, k)) });
     slides.push({ type: "kSolucao", h: p.sol.h, itens: p.sol.itens });
     if (p.case) slides.push({ type: "kCase", t: p.case.t, p: p.case.p, tela: p.case.tela });

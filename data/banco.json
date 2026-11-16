@@ -8,57 +8,13 @@
  "insta": "@armetec.br",
  "posts": [
   {
-   "f": "institucional",
-   "k": "Quem somos",
-   "pre": "Prazer,",
-   "h": "Somos a <em>Armetec</em>",
-   "sub": "Criamos sites, sistemas e aplicativos para que o dia a dia da sua empresa fique mais simples.",
-   "itens": [
-    [
-     "Dois sócios, <em>um propósito</em>",
-     "A Armetec nasceu da vontade de levar tecnologia de qualidade para empresas que precisam estar bem no digital, sem a burocracia e o custo de grandes agências.",
-     null,
-     "lista"
-    ],
-    [
-     "100% <em>online</em>",
-     "Atendemos empresas de todo o Brasil com reuniões online, grupo direto no WhatsApp e relatórios de progresso.",
-     null,
-     "chat"
-    ],
-    [
-     "Do design <em>ao código</em>",
-     "Cada site ou sistema é criado do zero para o seu negócio. Nada de template genérico.",
-     null,
-     "codigo"
-    ],
-    [
-     "Com você <em>depois da entrega</em>",
-     "Acompanhamos seu produto depois do lançamento, com manutenção e evolução.",
-     null,
-     "notificacoes"
-    ]
-   ],
-   "leg": "Muito prazer! A Armetec cria sites, sistemas e aplicativos sob medida para empresas que querem crescer sem complicação. Arrasta pro lado e conhece a gente."
-  },
-  {
-   "f": "frase",
-   "h": "Site lento <em>perde cliente.</em>",
-   "sub": "Se demora no celular, a pessoa volta pro Google e clica no próximo.",
-   "fig": "notebook",
-   "cena": {
-    "chip": "Abre em 1,2 s",
-    "chipSub": "antes: 8 segundos"
-   }
-  },
-  {
    "f": "mockup",
-   "k": "Sistema sob medida",
-   "h": "Um sistema do jeito que <em>sua empresa trabalha.</em>",
-   "sub": "Agenda, equipe e financeiro em um só lugar.",
-   "tela": "financeiro",
-   "fig": "tablet",
-   "leg": "Nada de se adaptar a um programa pronto. Na Armetec o sistema é desenhado em cima do jeito que a sua empresa já trabalha."
+   "k": "Sites",
+   "h": "Seu site deveria <em>trazer clientes.</em>",
+   "sub": "Rápido no celular, fácil de achar no Google e com o WhatsApp a um toque.",
+   "tela": "site",
+   "fig": "duo",
+   "leg": "Um site que demora no celular ou que ninguém encontra é um cartão de visita guardado na gaveta."
   },
   {
    "f": "dor",
@@ -93,22 +49,28 @@
      "Funciona no computador e no celular"
     ]
    },
-   "leg": "Planilha é ótima pra começar. O problema é quando a empresa cresce e ela vira o sistema principal. Arrasta pro lado e veja os sinais."
+   "leg": "Planilha é ótima pra começar. O problema é quando a empresa cresce e ela vira o sistema principal. Arrasta pro lado e veja os sinais.",
+   "capa": "planilha",
+   "capaCena": {}
   },
   {
    "f": "frase",
-   "h": "Planilha <em>não é sistema.</em>",
-   "sub": "Ela ajuda a começar, mas trava quando a empresa cresce.",
-   "fig": "lista"
+   "h": "Site lento <em>perde cliente.</em>",
+   "sub": "Se demora no celular, a pessoa volta pro Google e clica no próximo.",
+   "fig": "notebook",
+   "cena": {
+    "chip": "Abre em 1,2 s",
+    "chipSub": "antes: 8 segundos"
+   }
   },
   {
    "f": "mockup",
-   "k": "Sites",
-   "h": "Seu site deveria <em>trazer clientes.</em>",
-   "sub": "Rápido no celular, fácil de achar no Google e com o WhatsApp a um toque.",
-   "tela": "site",
-   "fig": "duo",
-   "leg": "Um site que demora no celular ou que ninguém encontra é um cartão de visita guardado na gaveta."
+   "k": "Agenda online",
+   "h": "Agenda cheia, <em>sem trocar mensagem.</em>",
+   "sub": "O cliente marca sozinho e o sistema confirma e lembra por você.",
+   "tela": "agenda",
+   "fig": "agenda",
+   "leg": "Seu cliente quer marcar na hora que lembra. Com agenda online ele marca sozinho e você só atende."
   },
   {
    "f": "institucional",
@@ -146,18 +108,23 @@
   },
   {
    "f": "frase",
-   "h": "Responda <em>primeiro.</em>",
-   "sub": "Quem responde antes tem mais chance de fechar a venda.",
-   "fig": "chat"
+   "h": "Planilha <em>não é sistema.</em>",
+   "sub": "Ela ajuda a começar, mas trava quando a empresa cresce.",
+   "fig": "lista"
   },
   {
    "f": "mockup",
-   "k": "Agenda online",
-   "h": "Agenda cheia, <em>sem trocar mensagem.</em>",
-   "sub": "O cliente marca sozinho e o sistema confirma e lembra por você.",
-   "tela": "agenda",
-   "fig": "agenda",
-   "leg": "Seu cliente quer marcar na hora que lembra. Com agenda online ele marca sozinho e você só atende."
+   "k": "CRM",
+   "h": "Saiba onde está <em>cada venda.</em>",
+   "sub": "Leads, propostas e metas da equipe num painel só.",
+   "tela": "vendas",
+   "fig": "grafico",
+   "cena": {
+    "titulo": "Vendas do mês",
+    "valor": "R$ 92 mil",
+    "chip": "Fechado +27%"
+   },
+   "leg": "Lead que ninguém retornou é venda que foi pro concorrente. Com um CRM do jeito da sua empresa, nenhum contato fica esquecido."
   },
   {
    "f": "dor",
@@ -198,27 +165,24 @@
     "p": "Sistema de gestão para barbearias criado pela Armetec: agenda online, comissões, caixa e fidelidade.",
     "tela": "barbearia"
    },
-   "leg": "Agenda no WhatsApp parece de graça, mas custa horário perdido, cliente irritado e você preso no celular. Arrasta e vê como resolver."
+   "leg": "Agenda no WhatsApp parece de graça, mas custa horário perdido, cliente irritado e você preso no celular. Arrasta e vê como resolver.",
+   "capa": "caos",
+   "capaCena": {}
   },
   {
    "f": "frase",
-   "h": "Lembrete <em>evita falta.</em>",
-   "sub": "Uma mensagem automática antes do horário faz o cliente lembrar.",
-   "fig": "notificacoes"
+   "h": "Responda <em>primeiro.</em>",
+   "sub": "Quem responde antes tem mais chance de fechar a venda.",
+   "fig": "chat"
   },
   {
    "f": "mockup",
-   "k": "CRM",
-   "h": "Saiba onde está <em>cada venda.</em>",
-   "sub": "Leads, propostas e metas da equipe num painel só.",
-   "tela": "vendas",
-   "fig": "grafico",
-   "cena": {
-    "titulo": "Vendas do mês",
-    "valor": "R$ 92 mil",
-    "chip": "Fechado +27%"
-   },
-   "leg": "Lead que ninguém retornou é venda que foi pro concorrente. Com um CRM do jeito da sua empresa, nenhum contato fica esquecido."
+   "k": "Loja e estoque",
+   "h": "Pedidos e estoque <em>sem caderno.</em>",
+   "sub": "Baixa automática a cada venda e aviso de estoque baixo.",
+   "tela": "pedidos",
+   "fig": "estoque",
+   "leg": "Vender online é metade do trabalho. A outra metade é controlar estoque e entregar sem erro, e isso também pode ser automático."
   },
   {
    "f": "institucional",
@@ -256,21 +220,23 @@
   },
   {
    "f": "frase",
-   "h": "Esteja <em>no Google.</em>",
-   "sub": "Quem não aparece na busca não existe para o cliente novo.",
-   "fig": "busca",
-   "cena": {
-    "busca": "loja de móveis perto de mim"
-   }
+   "h": "Lembrete <em>evita falta.</em>",
+   "sub": "Uma mensagem automática antes do horário faz o cliente lembrar.",
+   "fig": "notificacoes"
   },
   {
    "f": "mockup",
-   "k": "Loja e estoque",
-   "h": "Pedidos e estoque <em>sem caderno.</em>",
-   "sub": "Baixa automática a cada venda e aviso de estoque baixo.",
-   "tela": "pedidos",
-   "fig": "estoque",
-   "leg": "Vender online é metade do trabalho. A outra metade é controlar estoque e entregar sem erro, e isso também pode ser automático."
+   "k": "Titan Barber",
+   "h": "Criamos o <em>Titan Barber.</em>",
+   "sub": "Sistema completo para barbearias: agenda online, comissões, caixa e fidelidade.",
+   "tela": "barbearia",
+   "fig": "celular",
+   "cena": {
+    "chip": "Comissão calculada",
+    "chipSub": "fechamento em 1 toque",
+    "chipIc": "dinheiro"
+   },
+   "leg": "O Titan Barber é um sistema de gestão para barbearias criado do zero pela Armetec. É o mesmo cuidado que colocamos em cada projeto de cliente."
   },
   {
    "f": "dor",
@@ -305,31 +271,35 @@
      "Sua equipe foca no que gera resultado"
     ]
    },
-   "leg": "Se alguém da sua equipe passa horas copiando informação de um lugar pro outro, isso tem solução. Arrasta pro lado."
+   "leg": "Se alguém da sua equipe passa horas copiando informação de um lugar pro outro, isso tem solução. Arrasta pro lado.",
+   "capa": "planilha",
+   "capaCena": {
+    "arquivo": "controle_GERAL_copia(2).xlsx",
+    "postit": [
+     "DIGITAR DE",
+     "NOVO NO",
+     "SISTEMA DO",
+     "BANCO :("
+    ]
+   }
   },
   {
    "f": "frase",
-   "h": "Lucro não é <em>faturamento.</em>",
-   "sub": "Desconte taxas, comissões e custos antes de comemorar.",
-   "fig": "grafico",
+   "h": "Esteja <em>no Google.</em>",
+   "sub": "Quem não aparece na busca não existe para o cliente novo.",
+   "fig": "busca",
    "cena": {
-    "titulo": "Lucro real do mês",
-    "valor": "R$ 7.950"
+    "busca": "loja de móveis perto de mim"
    }
   },
   {
    "f": "mockup",
-   "k": "Titan Barber",
-   "h": "Criamos o <em>Titan Barber.</em>",
-   "sub": "Sistema completo para barbearias: agenda online, comissões, caixa e fidelidade.",
-   "tela": "barbearia",
-   "fig": "celular",
-   "cena": {
-    "chip": "Comissão calculada",
-    "chipSub": "fechamento em 1 toque",
-    "chipIc": "dinheiro"
-   },
-   "leg": "O Titan Barber é um sistema de gestão para barbearias criado do zero pela Armetec. É o mesmo cuidado que colocamos em cada projeto de cliente."
+   "k": "Sistema sob medida",
+   "h": "Um sistema do jeito que <em>sua empresa trabalha.</em>",
+   "sub": "Agenda, equipe e financeiro em um só lugar.",
+   "tela": "financeiro",
+   "fig": "tablet",
+   "leg": "Nada de se adaptar a um programa pronto. Na Armetec o sistema é desenhado em cima do jeito que a sua empresa já trabalha."
   },
   {
    "f": "institucional",
@@ -367,9 +337,13 @@
   },
   {
    "f": "frase",
-   "h": "Faça <em>backup.</em>",
-   "sub": "Se o computador quebrar hoje, seus dados estão salvos?",
-   "fig": "seguranca"
+   "h": "Lucro não é <em>faturamento.</em>",
+   "sub": "Desconte taxas, comissões e custos antes de comemorar.",
+   "fig": "grafico",
+   "cena": {
+    "titulo": "Lucro real do mês",
+    "valor": "R$ 7.950"
+   }
   },
   {
    "f": "mockup",
@@ -418,13 +392,15 @@
      "Indicadores de acesso e contatos"
     ]
    },
-   "leg": "Ter site não é o mesmo que ter um site que vende. Arrasta pro lado e confere se o seu tem algum desses problemas."
+   "leg": "Ter site não é o mesmo que ter um site que vende. Arrasta pro lado e confere se o seu tem algum desses problemas.",
+   "capa": "lento",
+   "capaCena": {}
   },
   {
    "f": "frase",
-   "h": "Orçamento rápido <em>fecha mais.</em>",
-   "sub": "Padronize preços e envie em minutos, com a sua marca.",
-   "fig": "documento"
+   "h": "Faça <em>backup.</em>",
+   "sub": "Se o computador quebrar hoje, seus dados estão salvos?",
+   "fig": "seguranca"
   },
   {
    "f": "mockup",
@@ -470,15 +446,9 @@
   },
   {
    "f": "frase",
-   "h": "Seu cliente está <em>no celular.</em>",
-   "sub": "Se o site não funciona bem no celular, ele não funciona.",
-   "fig": "celular",
-   "cena": {
-    "tela": "site",
-    "chip": "70% das visitas",
-    "chipSub": "vêm do celular",
-    "chipIc": "app"
-   }
+   "h": "Orçamento rápido <em>fecha mais.</em>",
+   "sub": "Padronize preços e envie em minutos, com a sua marca.",
+   "fig": "documento"
   },
   {
    "f": "mockup",
@@ -522,13 +492,28 @@
      "Comparação com os meses anteriores"
     ]
    },
-   "leg": "Faturamento é vaidade, lucro é sanidade. Se você não sabe quanto sobrou no mês passado, arrasta pro lado."
+   "leg": "Faturamento é vaidade, lucro é sanidade. Se você não sabe quanto sobrou no mês passado, arrasta pro lado.",
+   "capa": "planilha",
+   "capaCena": {
+    "arquivo": "contas_a_pagar_NOV.xlsx",
+    "postit": [
+     "CADÊ A",
+     "NOTINHA",
+     "DO DIA 12??"
+    ]
+   }
   },
   {
    "f": "frase",
-   "h": "Automatize <em>o repetitivo.</em>",
-   "sub": "Tarefa que segue sempre a mesma regra, um sistema faz por você.",
-   "fig": "codigo"
+   "h": "Seu cliente está <em>no celular.</em>",
+   "sub": "Se o site não funciona bem no celular, ele não funciona.",
+   "fig": "celular",
+   "cena": {
+    "tela": "site",
+    "chip": "70% das visitas",
+    "chipSub": "vêm do celular",
+    "chipIc": "app"
+   }
   },
   {
    "f": "mockup",
@@ -574,9 +559,9 @@
   },
   {
    "f": "frase",
-   "h": "Estoque no papel <em>some.</em>",
-   "sub": "Baixa automática a cada venda evita vender o que não tem.",
-   "fig": "estoque"
+   "h": "Automatize <em>o repetitivo.</em>",
+   "sub": "Tarefa que segue sempre a mesma regra, um sistema faz por você.",
+   "fig": "codigo"
   },
   {
    "f": "mockup",
@@ -619,13 +604,15 @@
      "Programa de fidelidade do seu jeito"
     ]
    },
-   "leg": "Conquistar cliente novo é caro. Fazer quem já comprou voltar pode ser automático. Arrasta pro lado."
+   "leg": "Conquistar cliente novo é caro. Fazer quem já comprou voltar pode ser automático. Arrasta pro lado.",
+   "capa": "caos",
+   "capaCena": {}
   },
   {
    "f": "frase",
-   "h": "Agenda online <em>trabalha 24h.</em>",
-   "sub": "O cliente marca de madrugada e você só confirma de manhã.",
-   "fig": "agenda"
+   "h": "Estoque no papel <em>some.</em>",
+   "sub": "Baixa automática a cada venda evita vender o que não tem.",
+   "fig": "estoque"
   },
   {
    "f": "mockup",
@@ -668,6 +655,57 @@
     ]
    ],
    "leg": "Planilha no computador de alguém e dado no grupo do WhatsApp não são seguros. Arrasta e veja como a Armetec cuida disso."
+  },
+  {
+   "f": "frase",
+   "h": "Agenda online <em>trabalha 24h.</em>",
+   "sub": "O cliente marca de madrugada e você só confirma de manhã.",
+   "fig": "agenda"
+  },
+  {
+   "f": "mockup",
+   "k": "Segurança",
+   "h": "Seus dados <em>protegidos.</em>",
+   "sub": "Criptografia, backup e acesso por perfil em todo projeto.",
+   "fig": "seguranca",
+   "leg": "Planilha no computador de alguém não é segura. Em todo projeto da Armetec a segurança vem desde o início."
+  },
+  {
+   "f": "dor",
+   "k": "Orçamentos",
+   "h": "Seu orçamento demora <em>um dia</em> pra sair?",
+   "sub": "Enquanto isso, o cliente já pediu pra outro.",
+   "caos": [
+    "Orçamento_modelo.docx",
+    "Tabela de preços antiga",
+    "Calculadora"
+   ],
+   "itens": [
+    [
+     "Montado <em>na mão</em>",
+     "Copia o modelo, troca o nome, recalcula tudo e confere se o preço está atualizado."
+    ],
+    [
+     "<em>Sem padrão</em> na equipe",
+     "Cada vendedor faz de um jeito, com um preço diferente."
+    ],
+    [
+     "Nenhum <em>acompanhamento</em>",
+     "O orçamento é enviado e ninguém sabe se o cliente abriu ou respondeu."
+    ]
+   ],
+   "sol": {
+    "h": "Com orçamento <em>automático:</em>",
+    "itens": [
+     "Orçamento pronto em minutos, com a sua marca",
+     "Preços e regras sempre atualizados",
+     "Envio por link ou WhatsApp",
+     "Aviso para fazer o follow-up"
+    ]
+   },
+   "leg": "Quem responde primeiro tem mais chance de fechar. Arrasta pro lado e veja como agilizar seus orçamentos.",
+   "capa": "documento",
+   "capaCena": {}
   },
   {
    "f": "frase",
@@ -744,55 +782,6 @@
   },
   {
    "f": "mockup",
-   "k": "Segurança",
-   "h": "Seus dados <em>protegidos.</em>",
-   "sub": "Criptografia, backup e acesso por perfil em todo projeto.",
-   "fig": "seguranca",
-   "leg": "Planilha no computador de alguém não é segura. Em todo projeto da Armetec a segurança vem desde o início."
-  },
-  {
-   "f": "dor",
-   "k": "Orçamentos",
-   "h": "Seu orçamento demora <em>um dia</em> pra sair?",
-   "sub": "Enquanto isso, o cliente já pediu pra outro.",
-   "caos": [
-    "Orçamento_modelo.docx",
-    "Tabela de preços antiga",
-    "Calculadora"
-   ],
-   "itens": [
-    [
-     "Montado <em>na mão</em>",
-     "Copia o modelo, troca o nome, recalcula tudo e confere se o preço está atualizado."
-    ],
-    [
-     "<em>Sem padrão</em> na equipe",
-     "Cada vendedor faz de um jeito, com um preço diferente."
-    ],
-    [
-     "Nenhum <em>acompanhamento</em>",
-     "O orçamento é enviado e ninguém sabe se o cliente abriu ou respondeu."
-    ]
-   ],
-   "sol": {
-    "h": "Com orçamento <em>automático:</em>",
-    "itens": [
-     "Orçamento pronto em minutos, com a sua marca",
-     "Preços e regras sempre atualizados",
-     "Envio por link ou WhatsApp",
-     "Aviso para fazer o follow-up"
-    ]
-   },
-   "leg": "Quem responde primeiro tem mais chance de fechar. Arrasta pro lado e veja como agilizar seus orçamentos."
-  },
-  {
-   "f": "frase",
-   "h": "App <em>sem loja de apps.</em>",
-   "sub": "Com PWA, seu sistema vira ícone na tela inicial por um link.",
-   "fig": "trio"
-  },
-  {
-   "f": "mockup",
    "k": "Google",
    "h": "Apareça <em>no Google.</em>",
    "sub": "Site estruturado para ser encontrado por quem procura o que você vende.",
@@ -839,9 +828,9 @@
   },
   {
    "f": "frase",
-   "h": "Dado espalhado é <em>dado perdido.</em>",
-   "sub": "Cliente, pedido e financeiro no mesmo lugar.",
-   "fig": "tablet"
+   "h": "App <em>sem loja de apps.</em>",
+   "sub": "Com PWA, seu sistema vira ícone na tela inicial por um link.",
+   "fig": "trio"
   },
   {
    "f": "mockup",
@@ -884,13 +873,39 @@
      "Cada um acessa pelo próprio celular"
     ]
    },
-   "leg": "Gestão de equipe não precisa ser na base da cobrança. Com a informação no lugar certo, todo mundo sabe o que fazer."
+   "leg": "Gestão de equipe não precisa ser na base da cobrança. Com a informação no lugar certo, todo mundo sabe o que fazer.",
+   "capa": "lista",
+   "capaCena": {
+    "titulo": "Tarefas atrasadas",
+    "itens": [
+     [
+      "Ligar para o cliente",
+      "Ana",
+      0
+     ],
+     [
+      "Enviar proposta",
+      "Bruno",
+      0
+     ],
+     [
+      "Repor estoque",
+      "Carla",
+      0
+     ],
+     [
+      "Fechar o caixa",
+      "Diego",
+      1
+     ]
+    ]
+   }
   },
   {
    "f": "frase",
-   "h": "Um botão <em>que vende.</em>",
-   "sub": "Deixe o próximo passo óbvio: WhatsApp a um toque no seu site.",
-   "fig": "duo"
+   "h": "Dado espalhado é <em>dado perdido.</em>",
+   "sub": "Cliente, pedido e financeiro no mesmo lugar.",
+   "fig": "tablet"
   },
   {
    "f": "mockup",
@@ -903,6 +918,12 @@
     "h": "Seu negócio <em>em destaque</em> na internet"
    },
    "leg": "Site lento perde cliente. Os sites da Armetec são feitos para abrir rápido em qualquer celular."
+  },
+  {
+   "f": "frase",
+   "h": "Um botão <em>que vende.</em>",
+   "sub": "Deixe o próximo passo óbvio: WhatsApp a um toque no seu site.",
+   "fig": "duo"
   }
  ]
 }

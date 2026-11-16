@@ -177,17 +177,96 @@ CENA.codigo = (ctx, b, th, d) => {
   ctx.font = "400 22px JB"; ctx.fillStyle = "#7EE0A1"; ctx.fillText("✓ 3 tarefas feitas sozinhas", x + 36, y + h - 40);
   chip(ctx, d.lado === "esq" ? x + w - 100 : b.x, y - 20, "light", "raio", d.chip || "Automático", d.chipSub || "sem ninguém digitar", GREEN, -0.04);
 };
-// 15. Notificações empilhadas (lembretes)
-CENA.notificacoes = (ctx, b, th, d) => {
-  const cx = b.x + b.w / 2; glowAt(ctx, cx, b.y + b.h / 2, 460, 0.28);
-  phoneDev(ctx, b.x + b.w * (d.lado === "esq" ? 0.28 : 0.72), b.y + b.h * 0.6, Math.min(700, b.h * 1.1), phoneLightUI, 1, d.lado === "esq" ? -0.12 : 0.12);
-  const ns = d.notifs || [["agenda", "Lembrete de horário", "Amanhã às 14:30 · confirme", ON_BLUE], ["check", "Cliente confirmou", "Mariana · 14:30", GREEN], ["chat", "Mensagem automática", "enviada para 12 clientes", "#7C5CFF"]];
-  ns.forEach(([ic, a, s2, c], k) => chip(ctx, d.lado === "esq" ? b.x + b.w * 0.36 + k * 18 : b.x + k * 26, b.y + 40 + k * 140, th, ic, a, s2, c, (k - 1) * 0.025, 470));
-};
 // 16. Estrela 3D com selos dos serviços
 CENA.estrela = (ctx, b, th, d) => {
   const cx = b.x + b.w / 2, cy = b.y + b.h / 2; logo3d(ctx, cx, cy, Math.min(b.h * 0.95, 560), { glow: th !== "light", rot: -0.18 });
   chip(ctx, b.x, b.y + b.h * 0.1, th, "site", "Sites", null, ON_BLUE, -0.05); chip(ctx, b.x + b.w - 260, b.y + b.h * 0.32, th, "painel", "Sistemas", null, GREEN, 0.04); chip(ctx, b.x + 40, b.y + b.h * 0.74, th, "app", "Aplicativos", null, "#7C5CFF", -0.03);
+};
+
+
+/* ---------- telas e cenas extras ---------- */
+// Tela de bloqueio do iPhone com notificações chegando (380x800).
+function phoneLockUI(notifs) {
+  return (ctx) => {
+    const g = ctx.createLinearGradient(0, 0, 380, 800); g.addColorStop(0, "#0E2A6B"); g.addColorStop(0.55, "#1668FF"); g.addColorStop(1, "#6D5BFF"); ctx.fillStyle = g; ctx.fillRect(0, 0, 380, 800);
+    ctx.globalAlpha = 0.12; icon(ctx, 40, 420, 300, "#fff"); ctx.globalAlpha = 1;
+    ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = "600 17px AI"; ctx.fillText("terça-feira, 18 de novembro", 190, 112);
+    ctx.font = "200 96px AI"; ctx.fillText("9:41", 190, 200); ctx.textAlign = "left";
+    notifs.forEach(([ic, a, b, c], k) => {
+      const y = 250 + k * 104; ctx.fillStyle = "rgba(255,255,255,.78)"; rr(ctx, 14, y, 352, 92, 22); ctx.fill();
+      ctx.fillStyle = c; rr(ctx, 28, y + 20, 50, 50, 12); ctx.fill(); lineIcon(ctx, ic, 39, y + 31, 28, "#fff", 2.4);
+      ctx.font = "700 17px AI"; ctx.fillStyle = INK; ctx.fillText(a, 92, y + 40); ctx.font = "400 15px AI"; ctx.fillStyle = "#3B4560"; ctx.fillText(b, 92, y + 64);
+      ctx.font = "400 13px AI"; ctx.fillStyle = "#5A6480"; ctx.textAlign = "right"; ctx.fillText(k ? k * 2 + " min" : "agora", 352, y + 40); ctx.textAlign = "left";
+    });
+    ctx.fillStyle = "rgba(255,255,255,.85)"; rr(ctx, 130, 776, 120, 6, 3); ctx.fill();
+  };
+}
+CENA.notificacoes = (ctx, b, th, d) => {
+  const ns = d.notifs || [["agenda", "Lembrete de horário", "Amanhã às 14:30 · toque para confirmar", ON_BLUE], ["check", "Cliente confirmou", "Mariana · qui, 14:30", GREEN], ["chat", "Mensagem automática", "enviada para 12 clientes", "#7C5CFF"], ["relogio", "Faltam 2 horas", "Corte + barba com o Lucas", "#F5A524"]];
+  const left = d.lado === "esq", cx = b.x + b.w * (left ? 0.34 : 0.66), cy = b.y + b.h * 0.58;
+  glowAt(ctx, cx, cy, 460, th === "dark" ? 0.35 : 0.3);
+  phoneDev(ctx, cx, th === "blue" ? b.y + b.h / 2 : cy, Math.min(820, b.h * (th === "blue" ? 0.98 : 1.2)), phoneLockUI(ns), 1, left ? -0.1 : 0.1);
+  // a notificação principal "salta" para fora da tela
+  chip(ctx, left ? b.x + b.w * 0.5 : b.x, b.y + b.h * 0.28, th, ns[1][0], ns[1][1], ns[1][2], ns[1][3], left ? 0.03 : -0.03, 460);
+};
+// Planilha bagunçada: células com erro, cor marcada à mão e um post-it.
+CENA.planilha = (ctx, b, th, d) => {
+  const w = Math.min(760, b.w * 0.86), h = Math.min(520, b.h * 0.92), x = b.x + (b.w - w) / 2 + 30, y = b.y + (b.h - h) / 2;
+  ctx.save(); ctx.translate(x + w / 2, y + h / 2); ctx.rotate(-0.05);
+  ctx.globalAlpha = 0.55; cardBox(ctx, -w / 2 - 40, -h / 2 - 50, w, h, "light", 14); ctx.globalAlpha = 1;
+  cardBox(ctx, -w / 2, -h / 2, w, h, "light", 14);
+  ctx.translate(-w / 2, -h / 2);
+  ctx.fillStyle = "#1D6F42"; rr(ctx, 0, 0, w, 56, [14, 14, 0, 0]); ctx.fill(); ctx.font = "600 22px AI"; ctx.fillStyle = "#fff"; ctx.fillText(d.arquivo || "planilha_final_v3_AGORA_VAI.xlsx", 22, 36);
+  const cols = 6, cw = (w - 50) / cols, rh = (h - 100) / 9, r = seeded((d.seed || 1) + 11);
+  ctx.font = "600 16px AI"; ctx.fillStyle = "#6B7690"; "ABCDEF".split("").forEach((l, k) => { ctx.textAlign = "center"; ctx.fillText(l, 50 + k * cw + cw / 2, 82); }); ctx.textAlign = "left";
+  for (let rI = 0; rI < 8; rI++) {
+    const yy = 96 + rI * rh; ctx.fillStyle = "#6B7690"; ctx.font = "600 16px AI"; ctx.fillText(String(rI + 1), 18, yy + rh * 0.65);
+    for (let c = 0; c < cols; c++) {
+      const xx = 50 + c * cw, v = r(); ctx.strokeStyle = "#E3E8F0"; ctx.lineWidth = 1; ctx.strokeRect(xx, yy, cw, rh);
+      let t = c === 0 ? ["Cliente " + (rI + 1), "Pedido " + (rI + 120), "??", "Fornecedor"][rI % 4] : "R$ " + Math.round(200 + v * 4800).toLocaleString("pt-BR"), col = INK;
+      if ((rI * cols + c) % 11 === 4) { t = "#REF!"; col = RED; ctx.fillStyle = "rgba(255,90,95,.12)"; ctx.fillRect(xx, yy, cw, rh); }
+      if ((rI * cols + c) % 13 === 7) { ctx.fillStyle = "#FFF07A"; ctx.fillRect(xx, yy, cw, rh); }
+      if ((rI * cols + c) % 17 === 9) { t = "#N/D"; col = RED; }
+      ctx.font = "500 16px AI"; ctx.fillStyle = col; ctx.fillText(t, xx + 8, yy + rh * 0.65);
+    }
+  }
+  ctx.restore();
+  // post-it
+  ctx.save(); ctx.translate(b.x + (d.lado === "esq" ? b.w - 230 : 20), b.y + b.h - 220); ctx.rotate(0.08); ctx.shadowColor = "rgba(0,0,0,.35)"; ctx.shadowBlur = 24; ctx.shadowOffsetY = 12;
+  ctx.fillStyle = "#FFE45C"; ctx.fillRect(0, 0, 230, 200); ctx.shadowColor = "transparent"; ctx.font = "700 26px MS"; ctx.fillStyle = "#3B2F00";
+  (d.postit || ["NÃO APAGAR", "A FÓRMULA!!", "(conferir com", "o João)"]).forEach((l, k) => ctx.fillText(l, 20, 50 + k * 38)); ctx.restore();
+};
+// Site travado: MacBook carregando, com cronômetro.
+function loadingUI(ctx) {
+  ctx.fillStyle = "#F2F4F8"; ctx.fillRect(0, 0, 1000, 620);
+  ctx.fillStyle = "#E1E6EF"; ctx.fillRect(0, 0, 1000, 70); [[40, 120, 380, 40], [40, 180, 300, 24], [40, 220, 340, 24], [580, 120, 380, 330], [40, 300, 200, 56]].forEach(([x, y, w, h]) => { ctx.fillStyle = "#E1E6EF"; rr(ctx, x, y, w, h, 10); ctx.fill(); });
+  ctx.fillStyle = "rgba(242,244,248,.7)"; ctx.fillRect(0, 0, 1000, 620);
+  ctx.lineWidth = 12; ctx.strokeStyle = "#D5DCE8"; ctx.beginPath(); ctx.arc(500, 300, 60, 0, 7); ctx.stroke(); ctx.strokeStyle = ON_BLUE; ctx.lineCap = "round"; ctx.beginPath(); ctx.arc(500, 300, 60, -1.2, 0.6); ctx.stroke(); ctx.lineCap = "butt";
+  ctx.font = "600 26px AI"; ctx.fillStyle = "#56627A"; ctx.textAlign = "center"; ctx.fillText("Carregando…", 500, 420); ctx.textAlign = "left";
+  ctx.fillStyle = "#D5DCE8"; rr(ctx, 300, 460, 400, 10, 5); ctx.fill(); ctx.fillStyle = ON_BLUE; rr(ctx, 300, 460, 90, 10, 5); ctx.fill();
+}
+CENA.lento = (ctx, b, th, d) => {
+  const w = Math.min(b.w * 0.86, 760, (b.h - 30) / 0.68); glowAt(ctx, b.x + b.w / 2, b.y + b.h / 2, 460, 0.25);
+  laptopDev(ctx, b.x + (b.w - w) / 2 + 20, b.y + (b.h - w * 0.68) / 2, w, loadingUI);
+  chip(ctx, b.x + b.w - 360, b.y + 10, th, "relogio", "8 segundos…", "e o cliente já foi embora", RED, 0.03);
+};
+// Conversa caótica no iPhone (capa dos carrosséis de problema).
+function chaosUI(caos) {
+  return (ctx) => {
+    ctx.fillStyle = "#0B1120"; ctx.fillRect(0, 0, 380, 800); ctx.fillStyle = "#111A2F"; ctx.fillRect(0, 0, 380, 140);
+    ctx.fillStyle = "#24345E"; ctx.beginPath(); ctx.arc(52, 100, 24, 0, 7); ctx.fill(); ctx.font = "700 22px AI"; ctx.fillStyle = "#fff"; ctx.fillText("Clientes", 88, 96); ctx.font = "400 15px AI"; ctx.fillStyle = "#8C98B5"; ctx.fillText("digitando…", 88, 118);
+    ctx.fillStyle = RED; ctx.beginPath(); ctx.arc(330, 100, 20, 0, 7); ctx.fill(); ctx.font = "700 17px AI"; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText("47", 330, 106); ctx.textAlign = "left";
+    [[caos[0], 0], ["Oi, tem horário amanhã?", 1], [caos[1], 0], ["Mandou o orçamento?", 1], [caos[2], 0], ["???", 1], ["Alguém viu meu pedido?", 1], ["Preciso disso hoje!", 0]].forEach(([m, mine], k) => {
+      ctx.font = "500 19px AI"; const bw = Math.min(ctx.measureText(m).width + 36, 300), bx = mine ? 356 - bw : 24, y = 168 + k * 74;
+      ctx.fillStyle = mine ? ON_BLUE : "#1A2440"; rr(ctx, bx, y, bw, 52, 16); ctx.fill(); ctx.fillStyle = "#fff"; ctx.fillText(m.length > 26 ? m.slice(0, 25) + "…" : m, bx + 18, y + 33);
+    });
+  };
+}
+CENA.caos = (ctx, b, th, d) => {
+  const caos = d.caos || ["planilha_final_v3.xlsx", "Caderno de anotações", "WhatsApp · 47 mensagens"];
+  glowAt(ctx, b.x + b.w * 0.6, b.y + b.h * 0.6, 460, 0.3);
+  phoneDev(ctx, b.x + b.w * 0.6, b.y + b.h * 0.5 + 120, Math.min(900, b.h + 260), chaosUI(caos), 1, -0.2);
+  chip(ctx, b.x, b.y + b.h * 0.3, th, "x", "47 não lidas", "e contando…", RED, -0.04);
 };
 
 // Cena padrão pelo assunto (quando o post não diz qual quer).
