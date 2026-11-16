@@ -1,0 +1,46 @@
+{
+  "outputDirectory": "public",
+  "functions": {
+    "api/publish.js": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/media/:d/:s/:n.jpg",
+      "destination": "/api/img?d=:d&s=:s&n=:n"
+    },
+    {
+      "source": "/:f(tiktok[A-Za-z0-9_-]+\\.txt)",
+      "destination": "/api/img?f=:f"
+    },
+    {
+      "source": "/api/ig-callback",
+      "destination": "/api/conectar?net=instagram&volta=1"
+    },
+    {
+      "source": "/api/tt-callback",
+      "destination": "/api/conectar?net=tiktok&volta=1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ]
+}

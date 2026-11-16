@@ -1,0 +1,11 @@
+{
+  "name": "titan-posts",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ioredis": "5.4.1",
+    "web-push": "3.6.7"
+  }
+}

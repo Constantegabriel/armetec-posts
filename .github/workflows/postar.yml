@@ -1,0 +1,50 @@
+# Agendador: pergunta ao site se é dia e hora de post (1 a cada 2 dias, banco.json), gera as imagens e posta no Instagram.
+# O GitHub costuma atrasar alguns minutos; o site aceita até 75 min de atraso e nunca posta em dobro.
+name: Postar no Instagram
+on:
+  schedule:
+    # Reserva: o despertador principal é o cron-job.org (chama o site a cada 30 min e o site dispara este fluxo).
+    - cron: "17 10-23 * * *"     # de hora em hora, 07:17–20:17 BRT
+    - cron: "17 0-2 * * *"       # 21:17–23:17 BRT
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "Digite 1 para postar agora o post do dia. Vazio = seguir a agenda."
+        required: false
+concurrency: postar
+jobs:
+  postar:
+    # Fixo no 24.04: o "ubuntu-latest" passou para o 26.04, onde o navegador (Playwright) ainda não roda.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verificar se há o que postar
+        id: check
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SLOT: ${{ inputs.slot }}
+          SO_VERIFICAR: "1"
+        run: node scripts/postar.mjs
+      - name: Guardar o navegador entre execuções
+        if: steps.check.outputs.postar == '1'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.56.1-chromium-ubuntu-24.04
+      - name: Instalar o navegador
+        if: steps.check.outputs.postar == '1'
+        run: |
+          npm i --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Gerar slides e postar
+        if: steps.check.outputs.postar == '1'
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SLOT: ${{ inputs.slot }}
+        run: node scripts/postar.mjs

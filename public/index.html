@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Armetec Posts</title>
+<meta name="description" content="Os posts do Instagram da Armetec, prontos para postar.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050b1f">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="icon" href="/icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Armetec Posts">
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.8" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M15.5 5.6V5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-stack" viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5-8 4.5-8-4.5Zm0 4 8 4.5 8-4.5M4 16.5 12 21l8-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 2h-15l1.5-2ZM10 20.5a2.2 2.2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 7 4.5 11.5 9 16M5 11.5h9.5a5 5 0 0 1 0 10H12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M14 4.5H6.5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2H14M10 12h10m0 0-3.5-3.5M20 12l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- Login -->
+<section class="login" id="login" hidden>
+  <form class="login-card" id="loginForm" novalidate>
+    <img src="/icons/icon-192.png" alt="" width="76" height="76" class="login-logo">
+    <h1>Armetec Posts</h1>
+    <p>Entre para ver os posts da Armetec.</p>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="username" inputmode="email" autocapitalize="none" required>
+    <label for="password">Senha</label>
+    <div class="pass">
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="button" id="showPass" aria-label="Mostrar senha"><svg><use href="#i-eye"/></svg></button>
+    </div>
+    <p class="err" id="loginErr" role="alert" hidden></p>
+    <button class="btn gold big" id="loginBtn" type="submit">Entrar</button>
+  </form>
+</section>
+
+<!-- App -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="shell top-in">
+      <div class="brand"><img src="/icons/icon-192.png" alt="" width="38" height="38"><div><b>Armetec Posts</b><span id="nextUp">Carregando…</span></div></div>
+      <div class="top-r">
+        <div class="ring" id="ring" role="img" aria-label="Posts feitos hoje"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle id="ringArc" cx="22" cy="22" r="19"/></svg><span id="ringTxt">0/1</span></div>
+        <button class="icon-btn" id="menuBtn" aria-label="Ajustes e notificações"><svg><use href="#i-bell"/></svg><i class="pip" id="bellPip" hidden></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell layout">
+    <aside class="side">
+      <nav class="week" aria-label="Dias">
+        <button class="wk-nav" id="prevW" aria-label="Semana anterior"><svg><use href="#i-left"/></svg></button>
+        <div class="days" id="days"></div>
+        <button class="wk-nav" id="nextW" aria-label="Próxima semana"><svg><use href="#i-right"/></svg></button>
+      </nav>
+
+      <section class="dayhead">
+        <div><h1 id="dTitle">Hoje</h1><p id="dSub"></p></div>
+        <button class="chip-btn" id="allBtn"><svg><use href="#i-stack"/></svg>Salvar tudo</button>
+      </section>
+
+      <div class="note" id="note" hidden></div>
+      <div class="all-done" id="offDay" hidden>
+        <b>Dia sem post</b>
+        <span id="offTxt"></span>
+        <button class="btn small gold" id="offBtn">Ver o próximo post</button>
+      </div>
+      <h3 class="sec-title" id="doneTitle" hidden>Postados</h3>
+      <div class="list done-list" id="done"></div>
+    </aside>
+
+    <section class="feed" aria-label="Post do dia">
+      <div class="list" id="pending"></div>
+      <div class="all-done" id="allDone" hidden>
+        <div class="all-done-ic"><svg><use href="#i-check"/></svg></div>
+        <b>Tudo postado</b>
+        <span>Os próximos posts já estão prontos. Escolha um dia na semana para adiantar.</span>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Ajustes -->
+<div class="sheet-bg" id="sheetBg" hidden></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+  <div class="grab"></div>
+  <h2 id="sheetTitle">Ajustes</h2>
+  <div class="row">
+    <div class="row-ic"><svg><use href="#i-bell"/></svg></div>
+    <div class="row-tx"><b>Notificações</b><span id="pushTxt">Aviso no celular na hora de cada post.</span></div>
+    <button class="btn small gold" id="pushBtn">Ativar</button>
+  </div>
+  <button class="link-btn" id="testBtn" hidden>Enviar notificação de teste</button>
+  <h3 class="sheet-sub">Postagem automática</h3>
+  <div class="row net" id="net-instagram">
+    <div class="row-ic"><svg><use href="#i-stack"/></svg></div>
+    <div class="row-tx"><b>Instagram</b><span class="net-txt">Carregando…</span></div>
+    <button class="btn small dark net-btn">Conectar</button>
+  </div>
+  <div class="row" id="installRow" hidden>
+    <div class="row-ic"><svg><use href="#i-phone"/></svg></div>
+    <div class="row-tx"><b>Instalar o app</b><span id="installTxt"></span></div>
+  </div>
+  <div class="row">
+    <div class="row-ic"><svg><use href="#i-out"/></svg></div>
+    <div class="row-tx"><b>Sair da conta</b><span>Você vai precisar entrar de novo.</span></div>
+    <button class="btn small dark" id="logoutBtn">Sair</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<template id="tpl-post">
+  <article class="post">
+    <div class="p-head">
+      <div class="when"><span class="time"></span><span class="meta"></span></div>
+      <span class="next-chip">Próximo</span>
+    </div>
+    <h2 class="hook"></h2>
+    <div class="viewer">
+      <div class="track"></div>
+      <button class="arrow l" aria-label="Slide anterior"><svg><use href="#i-left"/></svg></button>
+      <button class="arrow r" aria-label="Próximo slide"><svg><use href="#i-right"/></svg></button>
+    </div>
+    <div class="dots"></div>
+    <div class="cap">
+      <p class="cap-txt"></p>
+      <button class="cap-more">Ver legenda completa</button>
+    </div>
+    <div class="steps">
+      <button class="step save"><span class="n">1</span><span class="tx"><b>Salvar 7 fotos</b><small>Vão pra galeria, em ordem</small></span><svg class="ic"><use href="#i-down"/></svg></button>
+      <button class="step copy"><span class="n">2</span><span class="tx"><b>Copiar legenda</b><small>Texto e hashtags</small></span><svg class="ic"><use href="#i-copy"/></svg></button>
+      <button class="step post-btn"><span class="n">3</span><span class="tx"><b>Marcar como postado</b><small>Depois de publicar no Instagram</small></span><svg class="ic"><use href="#i-check"/></svg></button>
+    </div>
+    <div class="mini">
+      <span class="mini-ic"><svg><use href="#i-check"/></svg></span>
+      <span class="mini-tx"><b class="mini-time"></b><span class="mini-hook"></span></span>
+      <button class="undo" aria-label="Desfazer postado"><svg><use href="#i-undo"/></svg></button>
+    </div>
+  </article>
+</template>
+
+<script src="/slides.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
