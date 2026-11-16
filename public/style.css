@@ -239,5 +239,7 @@ main.shell{padding-bottom:40px}
 }
 @media (min-width: 1500px){ .shell{max-width:1400px} .layout{grid-template-columns:360px minmax(0,1fr)} }
 
-.day.off{opacity:.38}
+.day em{display:block;font-style:normal;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.65;margin-top:1px}
+.day.past{opacity:.55}
+.wk-nav:disabled{opacity:.25;cursor:default}
 #offDay{background:var(--surface);border-color:var(--line)}

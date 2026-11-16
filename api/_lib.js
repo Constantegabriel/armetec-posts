@@ -104,7 +104,8 @@ function nowSP() {
 // Um post a cada "cadaDias" dias a partir de "inicio" (mesma conta do slides.js).
 const every = () => Math.max(1, Number(banco.cadaDias) || 1);
 const dayOf = (ymd) => Math.round((Date.parse(ymd) - Date.parse(banco.inicio)) / 864e5);
-const isPostDay = (ymd) => ((dayOf(ymd) % every()) + every()) % every() === 0;
+// Dia de post: no ritmo de "cadaDias" e só enquanto houver post no banco (não repete conteúdo).
+const isPostDay = (ymd) => { const d = dayOf(ymd); return d >= 0 && d % every() === 0 && d / every() < banco.posts.length; };
 function postOf(ymd) {
   const n = banco.posts.length, seq = Math.ceil(dayOf(ymd) / every());
   const p = banco.posts[((seq % n) + n) % n];

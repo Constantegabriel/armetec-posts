@@ -1,5 +1,5 @@
 // Service worker: abre o app sem internet, guarda os posts do último acesso e mostra as notificações.
-const VERSION = "armetec-posts-v1";
+const VERSION = "armetec-posts-v2";
 const SHELL = ["/", "/index.html", "/style.css", "/app.js", "/slides.js", "/fonts/inter.woff2", "/fonts/plus-jakarta-bold.ttf", "/fonts/plus-jakarta-extra-bold.ttf",
   "/fonts/manrope-extra-bold.ttf", "/fonts/nasalization-rg.otf", "/manifest.webmanifest", "/favicon.png", "/icons/logo.png", "/icons/icon-192.png"];
 

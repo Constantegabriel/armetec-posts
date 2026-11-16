@@ -68,22 +68,27 @@ async function saveFiles(files) {
 }
 
 /* ---------- semana e cabeçalho ---------- */
+// Só aparecem os dias que têm post (1 a cada "cadaDias" dias, até o fim do banco).
+function postDays() { const [y, m, d] = BANK.inicio.split("-").map(Number); return BANK.posts.map((_, k) => new Date(y, m - 1, d + k * every())); }
+function firstFrom(from) { return postDays().find((d) => d >= from) || null; }
 function renderWeek() {
   const days = $("#days"); days.innerHTML = "";
-  const t = today0(), monday = addDays(selected, -((selected.getDay() + 6) % 7));
-  for (let k = 0; k < 7; k++) {
-    const d = addDays(monday, k), b = document.createElement("button");
-    b.className = "day" + (sameDay(d, t) ? " today" : "");
+  const t = today0(), list = postDays(), idx = Math.max(0, list.findIndex((d) => sameDay(d, selected))), start = Math.floor(idx / 7) * 7;
+  list.slice(start, start + 7).forEach((d) => {
+    const b = document.createElement("button");
+    b.className = "day" + (sameDay(d, t) ? " today" : "") + (d < t ? " past" : "");
     b.setAttribute("aria-current", sameDay(d, selected));
     b.setAttribute("aria-label", d.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" }));
-    b.innerHTML = `<small>${d.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", "").slice(0, 3)}</small><b>${d.getDate()}</b>`;
-    if (!isPostDay(d)) b.classList.add("off");
-    else if (isDone(d, 0)) b.appendChild(document.createElement("i"));
+    b.innerHTML = `<small>${d.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", "").slice(0, 3)}</small><b>${d.getDate()}</b><em>${d.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "")}</em>`;
+    if (isDone(d, 0)) b.appendChild(document.createElement("i"));
     b.onclick = () => { if (!sameDay(d, selected)) { selected = d; renderDay(); } };
     days.appendChild(b);
-  }
+  });
+  $("#prevW").disabled = start === 0; $("#nextW").disabled = start + 7 >= list.length;
+  $("#prevW").onclick = () => { selected = list[Math.max(0, start - 7)]; renderDay(); };
+  $("#nextW").onclick = () => { selected = list[Math.min(list.length - 1, start + 7)]; renderDay(); };
 }
-function nextPostDay(from) { let d = from; for (let k = 0; k < 60 && (!isPostDay(d) || isDone(d, 0)); k++) d = addDays(d, 1); return d; }
+function nextPostDay(from) { return postDays().find((d) => d >= from && !isDone(d, 0)) || null; }
 function renderProgress() {
   const t = today0(), postDay = isPostDay(t), doneN = postDay && isDone(t, 0) ? 1 : 0;
   $("#ring").hidden = !postDay;
@@ -91,7 +96,9 @@ function renderProgress() {
   $("#ringArc").style.strokeDashoffset = 119.4 * (1 - doneN);
   $("#ring").classList.toggle("full", doneN === 1);
   $("#ring").setAttribute("aria-label", doneN ? "Post de hoje feito" : "Post de hoje pendente");
-  const n = nextPostDay(t), diff = Math.round((n - t) / 864e5);
+  const n = nextPostDay(t);
+  if (!n) { $("#nextUp").textContent = "Banco de posts acabou"; return; }
+  const diff = Math.round((n - t) / 864e5);
   $("#nextUp").textContent = "Próximo post: " + (diff === 0 ? "hoje" : diff === 1 ? "amanhã" : n.toLocaleDateString("pt-BR", { weekday: "short", day: "numeric", month: "short" })) + " às " + BANK.horarios[0];
 }
 
@@ -189,15 +196,13 @@ function renderDay() {
   cards = postDay ? [buildCard(postIndex(selected), 0)] : [];
   $("#allBtn").hidden = !postDay;
   $("#offDay").hidden = postDay;
-  if (!postDay) { const nx = nextPostDay(selected); $("#offTxt").textContent = "O próximo post é " + nx.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" }) + "."; $("#offBtn").onclick = () => { selected = nx; renderDay(); }; }
+  if (!postDay) { const nx = firstFrom(selected); $("#offTxt").textContent = nx ? "O próximo post é " + nx.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" }) + "." : "O banco de posts acabou. Peça pro Claude recarregar."; $("#offBtn").hidden = !nx; if (nx) $("#offBtn").onclick = () => { selected = nx; renderDay(); }; }
   layout(false);
   if (!postDay) $("#allDone").hidden = true;
   renderProgress();
 }
 const $$imgs = (c) => [...c.el.querySelectorAll(".track img")].map((i) => i.src);
 
-$("#prevW").onclick = () => { selected = addDays(selected, -7); renderDay(); };
-$("#nextW").onclick = () => { selected = addDays(selected, 7); renderDay(); };
 $("#allBtn").onclick = async () => {
   const list = cards.filter((c) => !isDone(selected, c.j)).length ? cards.filter((c) => !isDone(selected, c.j)) : cards;
   if (list.some((c) => !c.files)) return toast("Preparando as fotos, toque de novo");
@@ -305,13 +310,14 @@ $("#logoutBtn").onclick = async () => {
 /* ---------- início ---------- */
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState !== "visible" || !BANK) return;
-  if (sameDay(addDays(selected, 1), today0())) { selected = today0(); renderDay(); } else renderProgress();
+  renderProgress();
 });
 async function boot() {
   const [r] = await Promise.all([fetch("/api/banco", { cache: "no-cache" }), loadLogo(), ...FONTS.map((f) => document.fonts.load(f))]);
   if (r.status === 401) return showLogin();
   if (!r.ok) throw new Error("http " + r.status);
   BANK = await r.json();
+  { const l = postDays(); selected = firstFrom(today0()) || l[l.length - 1]; } // abre no próximo dia com post
   $("#login").hidden = true; $("#app").hidden = false;
   renderDay();
   refreshPushUI().catch(() => {});

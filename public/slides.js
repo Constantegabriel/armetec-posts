@@ -12,7 +12,7 @@ function ymd(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padSta
 function dayIndex(date) { const [y, m, d] = BANK.inicio.split("-").map(Number); return Math.round((new Date(date.getFullYear(), date.getMonth(), date.getDate()) - new Date(y, m - 1, d)) / 864e5); }
 // Um post a cada "cadaDias" dias, a partir de "inicio". Dia sem post → null.
 const every = () => Math.max(1, Number(BANK.cadaDias) || 1);
-function isPostDay(date) { const d = dayIndex(date); return ((d % every()) + every()) % every() === 0; }
+function isPostDay(date) { const d = dayIndex(date); return d >= 0 && d % every() === 0 && d / every() < BANK.posts.length; }
 function postSeq(date) { return Math.ceil(dayIndex(date) / every()); } // número do post na sequência (0, 1, 2…)
 function postIndex(date) { const n = BANK.posts.length; return ((postSeq(date) % n) + n) % n; }
 
@@ -298,46 +298,91 @@ SL.capaInst = (ctx, s, i, total) => {
   y += txt(ctx, s.h, { x: X, y, w: MW, font: "800 112px AJ", lh: 116, color: "#fff", em: BLUE_2 });
   if (s.sub) txt(ctx, s.sub, { x: X, y: y - 116 + 74, w: 720, font: "500 32px AI", lh: 44, color: "rgba(255,255,255,.78)", em: "#fff" });
 };
-// Item numerado (institucional, escuro)
-SL.item = (ctx, s, i, total) => {
-  bgTech(ctx, { glowX: W * 0.9, glowY: H * 0.15 });
-  chrome(ctx, i, total);
-  const ot = { x: X, w: MW, font: "800 80px AJ", lh: 88, color: "#fff", em: BLUE_2 }, op = { x: X, w: MW - 40, font: "500 40px AI", lh: 58, color: "rgba(255,255,255,.8)", em: "#fff" };
-  const ht = hgt(ctx, s.t, ot), hp = hgt(ctx, s.p, op), y = stack([200, 40, ht, 36, hp], 200, H - 170);
-  ctx.font = "800 230px AJ"; ctx.lineWidth = 3; ctx.strokeStyle = "rgba(77,141,255,.85)"; ctx.strokeText(s.n, X - 8, y + 190);
-  ctx.globalAlpha = 0.07; icon(ctx, W - 470, H - 560, 560); ctx.globalAlpha = 1;
-  let yy = y + 200 + 40 + 70; yy += txt(ctx, s.t, { ...ot, y: yy });
-  const last = yy - 88; ctx.fillStyle = BLUE; ctx.fillRect(X, last + 40, 110, 7);
-  txt(ctx, s.p, { ...op, y: last + 40 + 82 });
+/* ---------- ícones de linha (24x24) ---------- */
+const ICONS = {
+  site: "M3 4h18v12H3z M8 20h8 M12 16v4", painel: "M3 3h7v9H3z M14 3h7v5h-7z M14 12h7v9h-7z M3 16h7v5H3z", app: "M7 2h10v20H7z M11 18h2",
+  nuvem: "M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.5A3.5 3.5 0 0 0 7 18z", escudo: "M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z M9 12l2 2 4-4",
+  chat: "M4 5h16v11H9l-5 4z M8 9h8 M8 12h5", codigo: "M8 8l-4 4 4 4 M16 8l4 4-4 4 M14 5l-4 14", agenda: "M4 5h16v15H4z M4 10h16 M8 3v4 M16 3v4",
+  grafico: "M4 20V11 M10 20V5 M16 20v-7 M3 20h18", pessoas: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6 M16 5.5a2.6 2.6 0 0 1 0 5.2 M21 20c0-2.8-1.6-5-4-5.6",
+  foguete: "M12 15l-3-3c1.5-4.5 5-8 10-9-1 5-4.5 8.5-9 10z M9 12l-4 1 2-4 M12 15l-1 4 4-2", chave: "M8 15a4 4 0 1 1 3.5-6H21v3h-2v3h-3v-3h-4.5A4 4 0 0 1 8 15z",
+  relogio: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2", raio: "M13 2L4 14h7l-1 8 9-12h-7z", doc: "M6 2h9l5 5v15H6z M14 2v6h6 M9 13h8 M9 17h6",
+  dinheiro: "M3 6h18v12H3z M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 9v.01 M18 15v.01", busca: "M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z M20 20l-4-4",
+  caixa: "M3 7l9-4 9 4v10l-9 4-9-4z M3 7l9 4 9-4 M12 11v10", alvo: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M12 12h.01",
+  x: "M6 6l12 12 M18 6L6 18", lapis: "M4 20l4-1 11-11-3-3L5 16z M14 7l3 3", check: "M5 12l5 5 9-10",
 };
-// Dor: capa clara com "bagunça" (cartões tortos)
-SL.capaDor = (ctx, s, i, total) => {
-  bgLight(ctx); chrome(ctx, i, total, { dark: false });
-  pill(ctx, s.k.toUpperCase(), X, 190, "rgba(22,104,255,.1)", BLUE);
-  const o = { x: X, w: MW, font: "800 100px AJ", lh: 106, color: INK, em: BLUE };
-  let y = 360; y += txt(ctx, s.h, { ...o, y });
-  if (s.sub) txt(ctx, s.sub, { x: X, y: y - 106 + 70, w: 820, font: "500 34px AI", lh: 48, color: "rgba(11,18,32,.65)" });
-  const caos = s.caos || ["planilha_final_v3.xlsx", "Caderno de anotações", "WhatsApp · 47 mensagens"];
-  const base = 860;
-  caos.slice(0, 3).forEach((c, k) => {
-    ctx.save(); ctx.translate(X + 10 + k * 300, base + [0, 110, 20][k]); ctx.rotate([-0.08, 0.06, -0.035][k]);
-    ctx.shadowColor = "rgba(15,30,70,.18)"; ctx.shadowBlur = 34; ctx.shadowOffsetY = 16; ctx.fillStyle = "#fff"; rr(ctx, 0, 0, 340, 200, 24); ctx.fill(); ctx.shadowColor = "transparent";
-    ctx.fillStyle = "rgba(255,90,95,.14)"; ctx.beginPath(); ctx.arc(58, 58, 30, 0, 7); ctx.fill(); ctx.font = "800 36px AJ"; ctx.fillStyle = RED; ctx.textAlign = "center"; ctx.fillText("!", 58, 71); ctx.textAlign = "left";
-    ctx.fillStyle = "#E9EDF5"; rr(ctx, 104, 42, 150, 12, 6); ctx.fill(); rr(ctx, 104, 64, 100, 12, 6); ctx.fill();
-    ctx.font = "700 28px AI"; ctx.fillStyle = INK; const l = wrapRich(ctx, [{ t: c }], 290); l.slice(0, 2).forEach((ln, q) => ctx.fillText(ln.map((w) => w.t).join(""), 28, 140 + q * 34));
-    ctx.restore();
+const ICON_WORDS = [[/site|google|landing/, "site"], [/sistema|painel|erp/, "painel"], [/aplicativo|celular|pwa|tela inicial|app/, "app"], [/nuvem|infra|no ar|backup/, "nuvem"],
+  [/segur|lgpd|protegid|criptograf/, "escudo"], [/fala|atendimento|whatsapp|chat|online/, "chat"], [/código|codigo|design ao/, "codigo"], [/agenda|horário|lembrete|confirma/, "agenda"],
+  [/relatório|número|resultado|automatizar|cálculo|calculo/, "grafico"], [/sócio|equipe|você|pessoas|time/, "pessoas"], [/lança|evolu|ideia|produto/, "foguete"], [/acesso|seu|amarra/, "chave"],
+  [/semana|prazo|rápid|entrega/, "relogio"], [/integra|automa/, "raio"], [/escopo|document|valor|preço|custa|orçament/, "doc"], [/entender|escuta|pergunt/, "busca"], [/desenho/, "lapis"], [/planilha|sair/, "caixa"]];
+function iconFor(t, fallback = "check") { const l = strip(t).toLowerCase(); const m = ICON_WORDS.find(([re]) => re.test(l)); return m ? m[1] : fallback; }
+function lineIcon(ctx, name, x, y, size, color, lw = 2) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(size / 24, size / 24); ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.lineCap = "round"; ctx.lineJoin = "round";
+  ctx.stroke(new Path2D(ICONS[name] || ICONS.check)); ctx.restore();
+}
+function glass(ctx, x, y, w, h, dark) {
+  ctx.save();
+  if (dark) { const g = ctx.createLinearGradient(x, y, x + w, y + h); g.addColorStop(0, "rgba(77,141,255,.16)"); g.addColorStop(1, "rgba(255,255,255,.03)"); ctx.fillStyle = g; rr(ctx, x, y, w, h, 34); ctx.fill(); ctx.strokeStyle = "rgba(120,170,255,.28)"; ctx.lineWidth = 2; ctx.stroke(); }
+  else { ctx.shadowColor = "rgba(15,30,70,.10)"; ctx.shadowBlur = 40; ctx.shadowOffsetY = 14; ctx.fillStyle = "#fff"; rr(ctx, x, y, w, h, 34); ctx.fill(); ctx.shadowColor = "transparent"; ctx.strokeStyle = "rgba(22,104,255,.10)"; ctx.lineWidth = 2; ctx.stroke(); }
+  ctx.restore();
+}
+// Cartões com ícone (2 ou 3 por slide). s.itens = [{n, t, p, ic}]; s.dark; s.kicker; s.titulo (opcional)
+SL.cards = (ctx, s, i, total) => {
+  const dark = s.dark !== false, fg = dark ? "#fff" : INK, em = dark ? BLUE_2 : BLUE, mut = dark ? "rgba(255,255,255,.74)" : "rgba(11,18,32,.68)";
+  dark ? bgTech(ctx, { glowX: W * 0.92, glowY: H * 0.12 }) : bgLight(ctx);
+  chrome(ctx, i, total, { dark });
+  const three = s.itens.length > 2, CW = MW, pad = 52, tw = CW - pad * 2 - 132 - 44;
+  const ot = { w: tw, font: `800 ${three ? 44 : 52}px AJ`, lh: three ? 52 : 60, color: fg, em }, op = { w: tw, font: `500 ${three ? 29 : 32}px AI`, lh: three ? 41 : 46, color: mut };
+  const hs = s.itens.map((it) => Math.max(104, hgt(ctx, it.t, ot) + 16 + hgt(ctx, it.p, op)) + pad * 2 - 18);
+  const oh = { x: X, w: MW, font: "800 64px AJ", lh: 72, color: fg, em }, hh = s.titulo ? hgt(ctx, s.titulo, oh) + 40 : 0, gap = three ? 26 : 34;
+  let y = stack([48, hh, ...hs.map((h) => h + gap)], 190, H - 150);
+  label(ctx, (s.kicker || "").toUpperCase(), X, y + 26, em, 24, 5); y += 48 + 14;
+  if (s.titulo) { txt(ctx, s.titulo, { ...oh, y: y + 56 }); y += hh; }
+  s.itens.forEach((it, k) => {
+    glass(ctx, X, y, CW, hs[k], dark);
+    const ix = X + pad, iy = y + pad - 6;
+    const g = ctx.createLinearGradient(ix, iy, ix + 104, iy + 104); g.addColorStop(0, BLUE_2); g.addColorStop(1, "#0E4FD6");
+    ctx.save(); ctx.shadowColor = "rgba(22,104,255,.45)"; ctx.shadowBlur = 24; ctx.fillStyle = it.ic === "x" ? RED : g; rr(ctx, ix, iy, 104, 104, 28); ctx.fill(); ctx.restore();
+    lineIcon(ctx, it.ic, ix + 26, iy + 26, 52, "#fff", 2.1);
+    ctx.font = "700 24px AI"; ctx.fillStyle = dark ? "rgba(255,255,255,.35)" : "rgba(11,18,32,.3)"; ctx.textAlign = "right"; ctx.fillText(it.n, X + CW - pad + 8, y + pad + 16); ctx.textAlign = "left";
+    const tx = ix + 132; let yy = y + pad + (three ? 32 : 38); yy += txt(ctx, it.t, { ...ot, x: tx, y: yy });
+    txt(ctx, it.p, { ...op, x: tx, y: yy - ot.lh + 16 + op.lh });
+    y += hs[k] + gap;
   });
 };
-// Dor: cada problema, em claro com marcador vermelho
-SL.dor = (ctx, s, i, total) => {
+// Dor: capa clara com um celular cheio de mensagens (a "bagunça")
+SL.capaDor = (ctx, s, i, total) => {
   bgLight(ctx); chrome(ctx, i, total, { dark: false });
-  const ot = { x: X, w: MW, font: "800 78px AJ", lh: 86, color: INK, em: BLUE }, op = { x: X, w: MW - 40, font: "500 40px AI", lh: 58, color: "rgba(11,18,32,.72)", em: INK };
-  const ht = hgt(ctx, s.t, ot), hp = hgt(ctx, s.p, op), y = stack([96, 50, ht, 36, hp], 200, H - 170);
-  ctx.fillStyle = "rgba(255,90,95,.12)"; rr(ctx, X, y, 96, 96, 26); ctx.fill();
-  ctx.strokeStyle = RED; ctx.lineWidth = 9; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(X + 32, y + 32); ctx.lineTo(X + 64, y + 64); ctx.moveTo(X + 64, y + 32); ctx.lineTo(X + 32, y + 64); ctx.stroke(); ctx.lineCap = "butt";
-  label(ctx, "PROBLEMA " + s.n, X + 124, y + 58, RED, 26, 5);
-  let yy = y + 96 + 50 + 66; yy += txt(ctx, s.t, { ...ot, y: yy });
-  yy += 36 - 86 + 40; txt(ctx, s.p, { ...op, y: yy });
+  pill(ctx, s.k.toUpperCase(), X, 180, "rgba(22,104,255,.1)", BLUE);
+  const o = { x: X, w: MW, font: "800 92px AJ", lh: 98, color: INK, em: BLUE };
+  let y = 340; y += txt(ctx, s.h, { ...o, y });
+  const subY = y - 98 + 66; let subH = 0;
+  if (s.sub) subH = txt(ctx, s.sub, { x: X, y: subY, w: 560, font: "500 32px AI", lh: 44, color: "rgba(11,18,32,.65)" });
+  // celular inclinado no canto direito
+  const pw = 390, ph = 800, px = W - pw - 40, py = Math.max(subY + 40, 640);
+  ctx.save(); ctx.translate(px + pw / 2, py + ph / 2); ctx.rotate(0.07); ctx.translate(-pw / 2, -ph / 2);
+  ctx.shadowColor = "rgba(15,30,70,.35)"; ctx.shadowBlur = 60; ctx.shadowOffsetY = 30; ctx.fillStyle = "#14161C"; rr(ctx, 0, 0, pw, ph, 64); ctx.fill(); ctx.shadowColor = "transparent";
+  rr(ctx, 14, 14, pw - 28, ph - 28, 52); ctx.save(); ctx.clip();
+  ctx.fillStyle = "#EEF1F6"; ctx.fillRect(0, 0, pw, ph);
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, pw, 150); ctx.fillStyle = "#DCE6FF"; ctx.beginPath(); ctx.arc(64, 108, 26, 0, 7); ctx.fill();
+  ctx.font = "800 24px AJ"; ctx.fillStyle = INK; ctx.fillText("Clientes", 104, 104); ctx.font = "500 18px AI"; ctx.fillStyle = "#8A95AB"; ctx.fillText("digitando…", 104, 128);
+  ctx.fillStyle = RED; ctx.beginPath(); ctx.arc(pw - 64, 104, 22, 0, 7); ctx.fill(); ctx.font = "800 20px AI"; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText("47", pw - 64, 111); ctx.textAlign = "left";
+  const caos = s.caos || ["planilha_final_v3.xlsx", "Caderno de anotações", "WhatsApp · 47 mensagens"];
+  const msgs = [[caos[0], 0], ["Oi, tem horário amanhã?", 1], [caos[1], 0], ["Mandou o orçamento?", 1], [caos[2], 0], ["???", 1], ["Alguém viu meu pedido?", 1]];
+  let my = 180;
+  msgs.forEach(([m, mine]) => {
+    ctx.font = "600 21px AI"; const w = Math.min(ctx.measureText(m).width + 40, pw - 90), bx = mine ? pw - 28 - w : 28;
+    ctx.fillStyle = mine ? "#DCF3E4" : "#fff"; rr(ctx, bx, my, w, 54, 16); ctx.fill(); ctx.fillStyle = INK; ctx.fillText(m.length > 26 ? m.slice(0, 25) + "…" : m, bx + 20, my + 35); my += 70;
+  });
+  ctx.restore(); ctx.restore();
+  // selo de alerta
+  ctx.save(); ctx.shadowColor = "rgba(255,90,95,.45)"; ctx.shadowBlur = 30; ctx.fillStyle = RED; ctx.beginPath(); ctx.arc(px + 8, py + 70, 54, 0, 7); ctx.fill(); ctx.restore();
+  ctx.font = "800 56px AJ"; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText("!", px + 8, py + 90); ctx.textAlign = "left";
+  // texto de apoio à esquerda
+  const ly = Math.max(subY + subH + 40, 760);
+  ["Informação espalhada", "Retrabalho", "Tudo depende de você"].forEach((t, k) => {
+    const yy = ly + k * 92; ctx.fillStyle = "rgba(255,90,95,.12)"; ctx.beginPath(); ctx.arc(X + 26, yy, 26, 0, 7); ctx.fill();
+    lineIcon(ctx, "x", X + 14, yy - 12, 24, RED, 3); ctx.font = "700 30px AI"; ctx.fillStyle = INK; ctx.fillText(t, X + 70, yy + 11);
+  });
 };
 // Solução: fundo azul com checklist
 SL.solucao = (ctx, s, i, total) => {
@@ -371,6 +416,7 @@ SL.cta = (ctx, s, i, total) => {
   ctx.font = "800 38px AJ"; const site = BANK.site || "armetec.com.br", bw = ctx.measureText(site).width + 110, bx = (W - bw) / 2, by = y - 50 + 44;
   ctx.save(); ctx.shadowColor = "rgba(22,104,255,.6)"; ctx.shadowBlur = 40; ctx.fillStyle = BLUE; rr(ctx, bx, by, bw, 104, 52); ctx.fill(); ctx.restore();
   ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(site, W / 2, by + 54); ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+  ctx.font = "600 27px AI"; ctx.letterSpacing = "2px"; ctx.fillStyle = "rgba(255,255,255,.6)"; ctx.textAlign = "center"; ctx.fillText("SITES  ·  SISTEMAS  ·  APLICATIVOS", W / 2, Math.min(by + 104 + 76, H - 140)); ctx.textAlign = "left"; ctx.letterSpacing = "0px";
 };
 // Foto única com mockup (claro)
 SL.mockup = (ctx, s) => {
@@ -424,12 +470,14 @@ const TAGS = [
 ];
 function buildPost(p, gi) {
   const slides = [];
+  const card = ([t, x, ic], k, fb) => ({ n: String(k + 1).padStart(2, "0"), t, p: x, ic: ic || iconFor(t, fb) });
   if (p.f === "institucional") {
     slides.push({ type: "capaInst", pre: p.pre, h: p.h, sub: p.sub });
-    p.itens.forEach(([t, x], k) => slides.push({ type: "item", n: String(k + 1).padStart(2, "0"), t, p: x }));
+    const its = p.itens.map((it, k) => card(it, k, "check"));
+    for (let k = 0; k < its.length; k += 2) slides.push({ type: "cards", dark: true, kicker: (p.k || "") + "  ·  " + String(k / 2 + 1).padStart(2, "0"), itens: its.slice(k, k + 2) });
   } else if (p.f === "dor") {
     slides.push({ type: "capaDor", k: p.k, h: p.h, sub: p.sub, caos: p.caos });
-    p.itens.forEach(([t, x], k) => slides.push({ type: "dor", n: String(k + 1).padStart(2, "0"), t, p: x }));
+    slides.push({ type: "cards", dark: false, kicker: "Os sinais", titulo: "Isso acontece <em>aí?</em>", itens: p.itens.map((it, k) => ({ ...card(it, k), ic: "x" })) });
     slides.push({ type: "solucao", h: p.sol.h, itens: p.sol.itens });
     if (p.case) slides.push({ type: "case", k: p.case.k, t: p.case.t, p: p.case.p, tela: p.case.tela, seed: gi });
   } else if (p.f === "mockup") {
