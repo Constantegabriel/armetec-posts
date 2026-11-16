@@ -53,6 +53,15 @@ module.exports = async (req, res) => {
       thumb: (await redis("EXISTS", `img:${ymd}:${s}:1`)) ? S.mediaUrl(S.siteUrl(req), ymd, s, 1) : null });
   }
   // Histórico dos últimos 7 dias: quantos posts saíram em cada rede.
+  // Próximo post da sequência (hoje, se ainda não saiu): para o Jarvis mostrar nos dias sem post.
+  let next = null;
+  for (let d = 0; d <= 60 && !next; d++) {
+    const day = new Date(Date.parse(ymd + "T12:00:00Z") + d * 864e5).toISOString().slice(0, 10);
+    if (!isPostDay(day)) continue;
+    const rec = (await S.getJSON(`pub:${day}:0`)) || {};
+    if (rec.instagram && rec.instagram.ok) continue;
+    next = { ymd: day, time: agenda[0] && agenda[0].time, hook: postOf(day).hook, hoje: d === 0 };
+  }
   const history = [];
   for (let d = 6; d >= 0; d--) {
     const day = new Date(Date.parse(ymd + "T12:00:00Z") - d * 864e5).toISOString().slice(0, 10), item = { ymd: day, instagram: 0, tiktok: 0, falhas: 0 };
@@ -61,7 +70,7 @@ module.exports = async (req, res) => {
   }
   const used = Math.ceil(dayOf(ymd) / every()); // posts da sequência já usados até hoje
   res.status(200).json({
-    ymd, config, agenda, instagram, tiktok, today, history,
+    ymd, config, agenda, instagram, tiktok, today, history, next,
     ultimaRodada: await S.getJSON("cfg:ultimaRodada"), lastError: { instagram: await S.getJSON("err:instagram"), tiktok: await S.getJSON("err:tiktok") }, igPending: Boolean(await S.getJSON("tok:instagram_pendente")),
     despertador: await (async () => { const k = await S.despertadorKey(true); return { url: `${S.siteUrl(req)}/api/publish?k=${k}`, ghToken: Boolean(process.env.GH_TOKEN || (await redis("GET", "cfg:ghToken"))), ultimoToque: await S.getJSON("cfg:ultimoToque"), ultimoDisparo: await S.getJSON("cfg:ultimoDisparo") }; })(),
     setup: { instagramApp: await S.igReady(), instagramMode: await S.igMode(), tiktokApp: await S.ttReady(), site: S.siteUrl(req) },
