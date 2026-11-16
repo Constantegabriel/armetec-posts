@@ -47,7 +47,10 @@ const REST_TOKEN = findEnv(/(^|_)(KV_REST_API_TOKEN|UPSTASH_REDIS_REST_TOKEN)$/)
 const TCP_URL = (() => { const k = Object.keys(process.env).sort((a, b) => (/REDIS/.test(b) ? 1 : 0) - (/REDIS/.test(a) ? 1 : 0)).find((n) => /^rediss?:\/\//.test(env(n))); return k ? env(k) : ""; })();
 const REDIS_MODE = REST_URL && REST_TOKEN ? "rest" : TCP_URL ? "tcp" : "";
 let tcp = null;
+// Prefixo em todas as chaves: o Armetec Posts nunca lê nem grava dados do Titan Posts, mesmo que os dois usem o mesmo banco.
+const PREFIX = "armetec:";
 async function redis(...cmd) {
+  if (cmd.length > 1 && String(cmd[0]).toUpperCase() !== "PING") cmd = [cmd[0], PREFIX + cmd[1], ...cmd.slice(2)];
   if (REDIS_MODE === "rest") {
     const r = await fetch(REST_URL, { method: "POST", headers: { Authorization: "Bearer " + REST_TOKEN }, body: JSON.stringify(cmd) });
     const j = await r.json();

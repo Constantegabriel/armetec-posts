@@ -19,7 +19,7 @@ const TT = "https://open.tiktokapis.com";
 // Endereço oficial do Armetec Posts. É ele que vai no link de retorno do Instagram/TikTok (precisa ser idêntico ao
 // cadastrado no app da Meta/TikTok) e nos links das fotos, não importa por qual endereço a chamada chegou.
 const DOMINIO = "https://posts.armetec.com.br";
-function siteUrl() { return (env("SITE_URL") || DOMINIO).replace(/\/+$/, ""); }
+function siteUrl() { const s = env("SITE_URL"); return (s && !/titanbarber/i.test(s) ? s : DOMINIO).replace(/\/+$/, ""); } // nunca usa o endereço do Titan
 const mediaUrl = (site, ymd, slot, n) => `${site}/media/${ymd}/${slot + 1}/${n}.jpg`;
 
 async function getJSON(key) { const v = await redis("GET", key); return v ? JSON.parse(v) : null; }
@@ -93,11 +93,11 @@ async function takeConnectLink(t) { if (!/^[\w-]{10,64}$/.test(String(t || "")))
 // Dados do app de desenvolvedor: da Vercel (se existirem) ou colados no Jarvis/Armetec Posts (guardados no Redis).
 let credCache = {};
 async function creds(net) {
-  // O que foi colado no Jarvis vale primeiro; as variáveis da Vercel ficam de reserva.
+  // As variáveis da Vercel valem primeiro; o que foi colado no Jarvis fica de reserva.
+  if (net === "instagram" && env("IG_APP_ID") && env("IG_APP_SECRET")) return { id: env("IG_APP_ID"), secret: env("IG_APP_SECRET"), ...(env("IG_CONFIG_ID") ? { config: env("IG_CONFIG_ID") } : {}) };
   if (credCache[net]) return credCache[net];
   const c = await getJSON("cfg:app:" + net);
   if (c && c.id && c.secret) return (credCache[net] = c);
-  if (net === "instagram" && env("IG_APP_ID") && env("IG_APP_SECRET")) return { id: env("IG_APP_ID"), secret: env("IG_APP_SECRET"), ...(env("IG_CONFIG_ID") ? { config: env("IG_CONFIG_ID") } : {}) };
   if (net === "tiktok" && env("TIKTOK_CLIENT_KEY") && env("TIKTOK_CLIENT_SECRET")) return { id: env("TIKTOK_CLIENT_KEY"), secret: env("TIKTOK_CLIENT_SECRET") };
   return null;
 }
